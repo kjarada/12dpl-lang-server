@@ -122,5 +122,5 @@ MIT - See LICENSE file
 
 ## 👤 Author
 
-Ben Olsen (Original)  
-Enhanced with professional auto-completion system (2025)
+**Ben Olsen** - Original creator  
+**Kamal Jarada** - 2026 enhancements (auto-formatting, type documentation, Bun build system, production optimization)
