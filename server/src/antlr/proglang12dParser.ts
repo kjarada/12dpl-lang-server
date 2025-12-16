@@ -1,4 +1,4 @@
-// Generated from proglang12d.g4 by ANTLR 4.13.1
+// Generated from server/src/proglang12d.g4 by ANTLR 4.13.1
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import {
@@ -1809,7 +1809,7 @@ export default class proglang12dParser extends Parser {
 				this.state = 307;
 				this.declarationSpecifiers();
 				this.state = 308;
-				this.match(proglang12dParser.Identifier);
+				this.declarator();
 				this.state = 309;
 				this.match(proglang12dParser.Semi);
 				}
@@ -1820,11 +1820,11 @@ export default class proglang12dParser extends Parser {
 				this.state = 311;
 				this.declarationSpecifiers();
 				this.state = 312;
-				this.match(proglang12dParser.Identifier);
+				this.declarator();
 				this.state = 313;
 				this.match(proglang12dParser.Assign);
 				this.state = 314;
-				this.assignmentExpression();
+				this.initializer();
 				this.state = 315;
 				this.match(proglang12dParser.Semi);
 				}
@@ -4632,9 +4632,9 @@ export default class proglang12dParser extends Parser {
 	0,293,292,1,0,0,0,294,39,1,0,0,0,295,296,7,8,0,0,296,41,1,0,0,0,297,302,
 	3,38,19,0,298,299,5,215,0,0,299,301,3,38,19,0,300,298,1,0,0,0,301,304,1,
 	0,0,0,302,300,1,0,0,0,302,303,1,0,0,0,303,43,1,0,0,0,304,302,1,0,0,0,305,
-	306,3,36,18,0,306,45,1,0,0,0,307,308,3,48,24,0,308,309,5,231,0,0,309,310,
-	5,214,0,0,310,318,1,0,0,0,311,312,3,48,24,0,312,313,5,231,0,0,313,314,5,
-	216,0,0,314,315,3,38,19,0,315,316,5,214,0,0,316,318,1,0,0,0,317,307,1,0,
+	306,3,36,18,0,306,45,1,0,0,0,307,308,3,48,24,0,308,309,3,60,30,0,309,310,
+	5,214,0,0,310,318,1,0,0,0,311,312,3,48,24,0,312,313,3,60,30,0,313,314,5,
+	216,0,0,314,315,3,80,40,0,315,316,5,214,0,0,316,318,1,0,0,0,317,307,1,0,
 	0,0,317,311,1,0,0,0,318,47,1,0,0,0,319,321,3,52,26,0,320,319,1,0,0,0,321,
 	322,1,0,0,0,322,320,1,0,0,0,322,323,1,0,0,0,323,49,1,0,0,0,324,326,3,52,
 	26,0,325,324,1,0,0,0,326,327,1,0,0,0,327,325,1,0,0,0,327,328,1,0,0,0,328,
@@ -5836,8 +5836,8 @@ export class DeclarationContext extends ParserRuleContext {
 	public declarationSpecifiers(): DeclarationSpecifiersContext {
 		return this.getTypedRuleContext(DeclarationSpecifiersContext, 0) as DeclarationSpecifiersContext;
 	}
-	public Identifier(): TerminalNode {
-		return this.getToken(proglang12dParser.Identifier, 0);
+	public declarator(): DeclaratorContext {
+		return this.getTypedRuleContext(DeclaratorContext, 0) as DeclaratorContext;
 	}
 	public Semi(): TerminalNode {
 		return this.getToken(proglang12dParser.Semi, 0);
@@ -5845,8 +5845,8 @@ export class DeclarationContext extends ParserRuleContext {
 	public Assign(): TerminalNode {
 		return this.getToken(proglang12dParser.Assign, 0);
 	}
-	public assignmentExpression(): AssignmentExpressionContext {
-		return this.getTypedRuleContext(AssignmentExpressionContext, 0) as AssignmentExpressionContext;
+	public initializer(): InitializerContext {
+		return this.getTypedRuleContext(InitializerContext, 0) as InitializerContext;
 	}
     public get ruleIndex(): number {
     	return proglang12dParser.RULE_declaration;

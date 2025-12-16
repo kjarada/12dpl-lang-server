@@ -94,8 +94,8 @@
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "bun run compile && node server/copy-resources.js",
-		"compile": "bun x tsc -b && node server/copy-resources.js",
+		"vscode:prepublish": "bun run compile && bun server/copy-resources.js",
+		"compile": "bun x tsc -b && bun server/copy-resources.js",
 		"watch": "bun x tsc -b -w",
 		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
 		"postinstall": "cd client && bun install && cd ../server && bun install && cd ..",

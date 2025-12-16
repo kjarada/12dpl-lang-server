@@ -141,8 +141,8 @@ constantExpression
     ;
 
 declaration
-    :   declarationSpecifiers Identifier ';'
-    |   declarationSpecifiers Identifier '=' assignmentExpression ';'
+    :   declarationSpecifiers declarator ';'
+    |   declarationSpecifiers declarator '=' initializer ';'
     ;
 
 declarationSpecifiers
