@@ -25,6 +25,10 @@ import {
 	Validator
 } from './validator.js';
 
+import {
+	prototypesLoader
+} from './prototypes.js';
+
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
 const connection = createConnection(ProposedFeatures.all);
@@ -57,9 +61,10 @@ connection.onInitialize((params: InitializeParams) => {
 		capabilities: {
 			textDocumentSync: TextDocumentSyncKind.Full,
 			// Tell the client that this server supports code completion.
-			// completionProvider: {
-			// 	resolveProvider: true
-			// }
+			completionProvider: {
+				resolveProvider: true,
+				triggerCharacters: ['.', '#']
+			}
 		}
 	};
 	if (hasWorkspaceFolderCapability) {
@@ -73,12 +78,17 @@ connection.onInitialize((params: InitializeParams) => {
 });
 
 connection.onInitialized(() => {
+	// Load prototypes asynchronously
+	prototypesLoader.load().catch((error) => {
+		connection.console.error(`Failed to load prototypes: ${error}`);
+	});
+
 	if (hasConfigurationCapability) {
 		// Register for all configuration changes.
 		connection.client.register(DidChangeConfigurationNotification.type, undefined);
 	}
 	if (hasWorkspaceFolderCapability) {
-		connection.workspace.onDidChangeWorkspaceFolders(_event => {
+		connection.workspace.onDidChangeWorkspaceFolders((_event) => {
 			connection.console.log('Workspace folder change event received.');
 		});
 	}
@@ -156,32 +166,85 @@ connection.onDidChangeWatchedFiles(_change => {
 });
 
 // This handler provides the initial list of the completion items.
-// connection.onCompletion(
-// 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-// 		// The pass parameter contains the position of the text document in
-// 		// which code complete got requested. For the example we ignore this
-// 		// info and always provide the same completion items.
-// 		 return [
-// 			{
-// 				label: 'Test',
-// 				kind: CompletionItemKind.Text,
-// 				data: 1
-// 			}
-// 		];
-// 	}
-// );
+connection.onCompletion(
+	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
+		// Get completions from loaded prototypes first
+		const prototypeItems = prototypesLoader.getCompletionItems();
+		
+		// Combine with keyword completions
+		const keywordItems: CompletionItem[] = [
+			{
+				label: 'if',
+				kind: CompletionItemKind.Keyword,
+				detail: 'Conditional statement',
+				data: 1
+			},
+			{
+				label: 'else',
+				kind: CompletionItemKind.Keyword,
+				detail: 'Else clause',
+				data: 2
+			},
+			{
+				label: 'while',
+				kind: CompletionItemKind.Keyword,
+				detail: 'While loop',
+				data: 3
+			},
+			{
+				label: 'for',
+				kind: CompletionItemKind.Keyword,
+				detail: 'For loop',
+				data: 4
+			},
+			{
+				label: 'return',
+				kind: CompletionItemKind.Keyword,
+				detail: 'Return statement',
+				data: 5
+			},
+			{
+				label: 'void',
+				kind: CompletionItemKind.Keyword,
+				detail: 'Void return type',
+				data: 6
+			},
+			{
+				label: 'int',
+				kind: CompletionItemKind.Keyword,
+				detail: 'Integer type',
+				data: 7
+			},
+			{
+				label: 'double',
+				kind: CompletionItemKind.Keyword,
+				detail: 'Double type',
+				data: 8
+			}
+		];
+		
+		return [...keywordItems, ...prototypeItems];
+	}
+);
 
 // This handler resolves additional information for the item selected in
 // the completion list.
-// connection.onCompletionResolve(
-// 	(item: CompletionItem): CompletionItem => {
-// 		if (item.data === 1) {
-// 			item.detail = 'Test details';
-// 			item.documentation = 'documentation';
-// 		}
-// 		return item;
-// 	}
-// );
+connection.onCompletionResolve(
+	(item: CompletionItem): CompletionItem => {
+		if (item.data === 1) {
+			item.documentation = 'Conditional: if (condition) { ... }';
+		} else if (item.data === 2) {
+			item.documentation = 'Else clause: else { ... }';
+		} else if (item.data === 3) {
+			item.documentation = 'While loop: while (condition) { ... }';
+		} else if (item.data === 4) {
+			item.documentation = 'For loop: for (init; condition; increment) { ... }';
+		} else if (item.data === 5) {
+			item.documentation = 'Return from function: return value;';
+		}
+		return item;
+	}
+);
 
 // Make the text document manager listen on the connection
 // for open, change and close text document events

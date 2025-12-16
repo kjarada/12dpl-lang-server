@@ -20,8 +20,8 @@
 	},
 	"main": "./client/out/extension",
 	"activationEvents": [
-        "onLanguage:12dPL"
-    ],
+		"onLanguage:12dPL"
+	],
 	"contributes": {
 		"languages": [
 			{
@@ -73,10 +73,10 @@
 				"name": "12dPL",
 				"owner": "12dPL",
 				"fileLocation": [
-                    "relative",
-                    "${fileDirname}"
-                ],
-                "pattern": {
+					"relative",
+					"${fileDirname}"
+				],
+				"pattern": {
 					"regexp": "^\"(.*?)\",(.*?)line (.*?)\\.(.*?)\\: (.*?)\\: (.*)",
 					"file": 1,
 					"line": 3,
@@ -101,7 +101,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.42.0",
 		"@typescript-eslint/parser": "^5.42.0",
 		"eslint": "^8.26.0",
-		"mocha": "^9.2.1",
-		"typescript": "^4.9.4"
+		"mocha": "^11.7.5",
+		"typescript": "^4.9.5"
 	}
 }
