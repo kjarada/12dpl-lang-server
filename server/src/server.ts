@@ -232,22 +232,39 @@ connection.onCompletion(
 // This handler provides hover information for symbols.
 connection.onHover(
 	(textDocumentPositionParams) => {
-		const textDocument = documents.get(textDocumentPositionParams.textDocument.uri);
-		const word = getWordAtPosition(textDocument, textDocumentPositionParams.position);
+		try {
+			const textDocument = documents.get(textDocumentPositionParams.textDocument.uri);
+			const word = getWordAtPosition(textDocument, textDocumentPositionParams.position);
 
-		if (!word) {
+			if (!word) {
+				return null;
+			}
+
+			// Check if it's a prototype
+			const prototype = prototypesLoader.getPrototype(word);
+			if (prototype) {
+				const signature = prototypesLoader.getPrototypeSignature(word);
+				return {
+					contents: {
+						language: '12dpl',
+						value: signature || word
+					}
+				};
+			}
+
+			// Check if it's a keyword
+			const keywords = ['if', 'else', 'while', 'for', 'return', 'void', 'int', 'double'];
+			if (keywords.includes(word.toLowerCase())) {
+				return {
+					contents: `Keyword: ${word}`
+				};
+			}
+
+			return null;
+		} catch (e) {
+			connection.console.error(`Hover error: ${e}`);
 			return null;
 		}
-
-		const prototype = prototypesLoader.getPrototype(word);
-		if (prototype) {
-			const documentation = prototypesLoader.getPrototypeSignature(word);
-			return {
-				contents: documentation || word
-			};
-		}
-
-		return null;
 	}
 );
 
