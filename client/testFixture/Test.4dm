@@ -160,6 +160,7 @@ goto align;
     Prompt("not an alignment string - try again");
 goto align;
 }
+
 // query all alignment info
  Integer no_hip;
   Get_hip_points(cl,no_hip);
