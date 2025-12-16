@@ -64,7 +64,9 @@ connection.onInitialize((params: InitializeParams) => {
 			completionProvider: {
 				resolveProvider: true,
 				triggerCharacters: ['.', '#']
-			}
+			},
+			// Tell the client that this server supports hover.
+			hoverProvider: true
 		}
 	};
 	if (hasWorkspaceFolderCapability) {
@@ -226,6 +228,53 @@ connection.onCompletion(
 		return [...keywordItems, ...prototypeItems];
 	}
 );
+
+// This handler provides hover information for symbols.
+connection.onHover(
+	(textDocumentPositionParams) => {
+		const textDocument = documents.get(textDocumentPositionParams.textDocument.uri);
+		const word = getWordAtPosition(textDocument, textDocumentPositionParams.position);
+
+		if (!word) {
+			return null;
+		}
+
+		const prototype = prototypesLoader.getPrototype(word);
+		if (prototype) {
+			const documentation = prototypesLoader.getPrototypeSignature(word);
+			return {
+				contents: documentation || word
+			};
+		}
+
+		return null;
+	}
+);
+
+// Helper function to get word at position
+function getWordAtPosition(textDocument: TextDocument | undefined, position: any): string | null {
+	if (!textDocument) {
+		return null;
+	}
+
+	const line = textDocument.getText().split('\n')[position.line];
+	if (!line) {
+		return null;
+	}
+
+	let start = position.character;
+	let end = position.character;
+
+	while (start > 0 && /[a-zA-Z0-9_]/.test(line[start - 1])) {
+		start--;
+	}
+
+	while (end < line.length && /[a-zA-Z0-9_]/.test(line[end])) {
+		end++;
+	}
+
+	return line.substring(start, end);
+}
 
 // This handler resolves additional information for the item selected in
 // the completion list.
