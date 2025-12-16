@@ -1,26 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { CompletionItem, CompletionItemKind } from 'vscode-languageserver/node';
-import { parseStringPromise } from 'xml2js';
 
-export interface Parameter {
-	Type: string[];
-	Name: string[];
-}
-
-export interface MacroCall {
-	Name: string[];
-	LibraryID: string[];
-	Return: Array<{ Type: string[] }>;
-	Parameters: Array<{ Parameter?: Parameter[] }>;
-}
-
-export interface PrototypesData {
-	MacroCalls: { MacroCall?: MacroCall[] };
+interface FunctionData {
+	name: string;
+	id: number;
+	returnType: string;
+	parameters: Array<{ name: string; type: string }>;
+	description: string;
 }
 
 class PrototypesLoader {
-	private prototypes: Map<string, MacroCall> = new Map();
+	private prototypes: Map<string, FunctionData> = new Map();
 	private completionItems: CompletionItem[] = [];
 	private loaded = false;
 
@@ -30,55 +21,54 @@ class PrototypesLoader {
 		}
 
 		try {
-			const prototypesPath = path.join(__dirname, 'resources', 'prototypes.xml');
-			const xmlContent = fs.readFileSync(prototypesPath, 'utf-8');
-			const parser = require('xml2js');
-			const result = (await parser.parseStringPromise(xmlContent)) as PrototypesData;
-
-			if (result.MacroCalls?.MacroCall) {
-				result.MacroCalls.MacroCall.forEach((macro) => {
-					const name = macro.Name[0];
-					this.prototypes.set(name.toLowerCase(), macro);
-					
-					// Create completion item
-					const returnType = macro.Return?.[0]?.Type?.[0] || 'void';
-					const paramCount = macro.Parameters?.[0]?.Parameter?.length || 0;
+			// Try to load from JSON first (better quality data)
+			const jsonPath = path.join(__dirname, 'resources', '12dpl_complete_functions.json');
+			if (fs.existsSync(jsonPath)) {
+				const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
+				const functions: FunctionData[] = JSON.parse(jsonContent);
+				
+				functions.forEach((func) => {
+					const key = func.name.toLowerCase();
+					this.prototypes.set(key, func);
 					
 					this.completionItems.push({
-						label: name,
+						label: func.name,
 						kind: CompletionItemKind.Function,
-						detail: `${returnType} ${name}(...)`,
-						documentation: this.generateDocumentation(macro),
-						data: name
+						detail: this.generateSignature(func),
+						documentation: this.generateDocumentation(func),
+						data: func.name
 					});
 				});
-			}
 
-			this.loaded = true;
-			console.log(`Loaded ${this.prototypes.size} prototypes from prototypes.xml`);
+				this.loaded = true;
+				console.log(`Loaded ${this.prototypes.size} prototypes from JSON`);
+			} else {
+				console.error('Prototypes JSON file not found');
+				this.loaded = true;
+			}
 		} catch (error) {
 			console.error('Error loading prototypes:', error);
-			this.loaded = true; // Mark as loaded even on error to avoid retries
+			this.loaded = true;
 		}
 	}
 
-	private generateDocumentation(macro: MacroCall): string {
-		const name = macro.Name[0];
-		const returnType = macro.Return?.[0]?.Type?.[0] || 'void';
-		const params = macro.Parameters?.[0]?.Parameter || [];
+	private generateSignature(func: FunctionData): string {
+		const params = func.parameters.map(p => `${p.type} ${p.name}`).join(', ');
+		return `${func.returnType} ${func.name}(${params})`;
+	}
 
-		let doc = `**Function**: ${name}\n\n`;
-		doc += `**Return Type**: ${returnType}\n\n`;
+	private generateDocumentation(func: FunctionData): string {
+		const params = func.parameters.map(p => `${p.type} ${p.name}`).join(', ');
+		const signature = `${func.returnType} ${func.name}(${params})`;
 		
-		if (params.length > 0) {
-			doc += `**Parameters**:\n`;
-			params.forEach((param) => {
-				const paramType = param.Type[0];
-				const paramName = param.Name[0];
-				doc += `- \`${paramType} ${paramName}\`\n`;
+		let doc = `\`\`\`12dpl\n${signature}\n\`\`\`\n\n`;
+		doc += func.description || 'No description available';
+		
+		if (func.parameters.length > 0) {
+			doc += `\n\n**Parameters:**\n`;
+			func.parameters.forEach((param) => {
+				doc += `- \`${param.type}\` **${param.name}**\n`;
 			});
-		} else {
-			doc += `**Parameters**: None\n`;
 		}
 
 		return doc;
@@ -88,23 +78,16 @@ class PrototypesLoader {
 		return this.completionItems;
 	}
 
-	getPrototype(name: string): MacroCall | undefined {
+	getPrototype(name: string): FunctionData | undefined {
 		return this.prototypes.get(name.toLowerCase());
 	}
 
 	getPrototypeSignature(name: string): string | undefined {
-		const macro = this.getPrototype(name);
-		if (!macro) {
+		const func = this.getPrototype(name);
+		if (!func) {
 			return undefined;
 		}
-
-		const returnType = macro.Return?.[0]?.Type?.[0] || 'void';
-		const params = macro.Parameters?.[0]?.Parameter || [];
-		const paramStr = params
-			.map((p) => `${p.Type[0]} ${p.Name[0]}`)
-			.join(', ');
-
-		return `${returnType} ${name}(${paramStr})`;
+		return this.generateSignature(func);
 	}
 }
 

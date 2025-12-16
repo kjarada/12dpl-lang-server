@@ -234,8 +234,11 @@ connection.onHover(
 	(textDocumentPositionParams) => {
 		try {
 			const textDocument = documents.get(textDocumentPositionParams.textDocument.uri);
-			const word = getWordAtPosition(textDocument, textDocumentPositionParams.position);
+			if (!textDocument) {
+				return null;
+			}
 
+			const word = getWordAtPosition(textDocument, textDocumentPositionParams.position);
 			if (!word) {
 				return null;
 			}
@@ -245,10 +248,13 @@ connection.onHover(
 			if (prototype) {
 				const signature = prototypesLoader.getPrototypeSignature(word);
 				return {
-					contents: {
-						language: '12dpl',
-						value: signature || word
-					}
+					contents: [
+						{
+							language: '12dpl',
+							value: signature || word
+						},
+						prototype.description || 'No description available'
+					]
 				};
 			}
 
@@ -256,7 +262,7 @@ connection.onHover(
 			const keywords = ['if', 'else', 'while', 'for', 'return', 'void', 'int', 'double'];
 			if (keywords.includes(word.toLowerCase())) {
 				return {
-					contents: `Keyword: ${word}`
+					contents: `**Keyword:** ${word}`
 				};
 			}
 
