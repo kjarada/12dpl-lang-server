@@ -27,6 +27,8 @@ import { AssignmentOperatorContext } from "./proglang12dParser";
 import { ExpressionContext } from "./proglang12dParser";
 import { ConstantExpressionContext } from "./proglang12dParser";
 import { DeclarationContext } from "./proglang12dParser";
+import { InitDeclaratorListContext } from "./proglang12dParser";
+import { InitDeclaratorContext } from "./proglang12dParser";
 import { DeclarationSpecifiersContext } from "./proglang12dParser";
 import { DeclarationSpecifiers2Context } from "./proglang12dParser";
 import { DeclarationSpecifierContext } from "./proglang12dParser";
@@ -219,6 +221,18 @@ export default class proglang12dVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitDeclaration?: (ctx: DeclarationContext) => Result;
+	/**
+	 * Visit a parse tree produced by `proglang12dParser.initDeclaratorList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInitDeclaratorList?: (ctx: InitDeclaratorListContext) => Result;
+	/**
+	 * Visit a parse tree produced by `proglang12dParser.initDeclarator`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInitDeclarator?: (ctx: InitDeclaratorContext) => Result;
 	/**
 	 * Visit a parse tree produced by `proglang12dParser.declarationSpecifiers`.
 	 * @param ctx the parse tree

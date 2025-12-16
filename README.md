@@ -10,10 +10,10 @@ A professional language server for 12dPL with intelligent code completion and re
 - **Real-time Validation** - ANTLR-based code parsing and error detection
 - **AST Parsing** - Complete abstract syntax tree generation
 - **Function Documentation** - Hover over functions to see signatures and parameters
+- **Advanced Grammar Support** - Arrays, Switch statements, Pass-by-reference, Macros
 
 ### Coming Soon
 - Document Highlights: highlights all 'equal' symbols in a text document
-- Hover: provides detailed hover information for symbols
 - Signature Help: provides signature help during function calls
 - Goto Definition: navigation to function definitions
 - Goto Type Definition: navigation to type definitions
@@ -27,13 +27,13 @@ A professional language server for 12dPL with intelligent code completion and re
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Compile
-npm run compile
+bun run compile
 
 # Watch mode (recommended for development)
-npm run watch
+bun run watch
 
 # Launch in VS Code (press F5 or Ctrl+F5)
 ```

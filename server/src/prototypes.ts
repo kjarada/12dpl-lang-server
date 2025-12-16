@@ -57,7 +57,7 @@ class PrototypesLoader {
 		if (func.parameters.length === 0) {
 			return `${func.name}()`;
 		}
-		const params = func.parameters.map((p, index) => `\${${index + 1}:${p.name}}`).join(', ');
+		const params = func.parameters.map((p, index) => `\${${index + 1}:${p.type} ${p.name}}`).join(', ');
 		return `${func.name}(${params})`;
 	}
 

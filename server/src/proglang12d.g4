@@ -141,8 +141,15 @@ constantExpression
     ;
 
 declaration
-    :   declarationSpecifiers declarator ';'
-    |   declarationSpecifiers declarator '=' initializer ';'
+    :   declarationSpecifiers initDeclaratorList ';'
+    ;
+
+initDeclaratorList
+    :   initDeclarator (',' initDeclarator)*
+    ;
+
+initDeclarator
+    :   declarator ('=' initializer)?
     ;
 
 declarationSpecifiers
@@ -316,6 +323,7 @@ declarator
 
 directDeclarator
     :   Identifier
+    |   directDeclarator '[' constantExpression? ']'
     |   directDeclarator '(' parameterTypeList ')'
     |   directDeclarator '(' identifierList? ')'
 //    |   Identifier ':' DigitSequence  // bit field
@@ -433,7 +441,7 @@ forCondition
 	;
 
 forDeclaration
-    :   declarationSpecifiers
+    :   declarationSpecifiers initDeclaratorList
     ;
 
 forExpression
