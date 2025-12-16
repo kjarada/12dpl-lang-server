@@ -284,6 +284,26 @@ builtInTypeSpecifier
     | 'Slider_Box'
     | 'Function_Property_Collection'
     | 'Curve'
+    | 'Integer64'
+    | 'Guid'
+    | 'Attribute_Blob'
+    | 'Attribute'
+    | 'Functions'
+    | 'Database_Results'
+    | 'Transactions'
+    | 'Dynamic_Integer64'
+    | 'Colour'
+    | 'Time'
+    | 'Drainage_Network'
+    | 'Integer_Set'
+    | 'List'
+    | 'Process_Handle'
+    | 'Real_Set'
+    | 'Selection'
+    | 'String'
+    | 'Text_Set'
+    | 'Time_Zone_Box'
+    | 'Time_Zone_Box_Box'
     ;
 
 specifierQualifierList
@@ -318,6 +338,7 @@ parameterList
 parameterDeclaration
     :   declarationSpecifiers2 Identifier?
     |   declarationSpecifiers2 '&' Identifier
+    |   declarationSpecifiers2 Identifier '[' ']' // Array parameter
     ;
 
 identifierList
@@ -372,8 +393,8 @@ statement
 
 labeledStatement
     :   Identifier ':' statement
-    |   'case' constantExpression ':' statement
-    |   'default' ':' statement
+    |   'case' constantExpression ':' compoundStatement
+    |   'default' ':' compoundStatement
     ;
 
 compoundStatement
@@ -468,6 +489,34 @@ Return : 'return';
 Switch : 'switch';
 Void : 'void';
 While : 'while';
+
+Auto : 'auto';
+Class : 'class';
+Const : 'const';
+Delete : 'delete';
+Enum : 'enum';
+Extern : 'extern';
+Friend : 'friend';
+Inline : 'inline';
+New : 'new';
+Operator : 'operator';
+Private : 'private';
+Protected : 'protected';
+Public : 'public';
+Register : 'register';
+Signed : 'signed';
+Sizeof : 'sizeof';
+Static : 'static';
+Struct : 'struct';
+Template : 'template';
+This : 'this';
+Throw : 'throw';
+Try : 'try';
+Typedef : 'typedef';
+Union : 'union';
+Unsigned : 'unsigned';
+Virtual : 'virtual';
+Volatile : 'volatile';
 
 
 LeftParen : '(';
@@ -571,6 +620,7 @@ IntegerConstant
     |   OctalConstant IntegerSuffix?
     |   HexadecimalConstant IntegerSuffix?
     |	BinaryConstant
+    |   DecimalConstant 'LL' // Explicit support for 64-bit integer suffix
     ;
 
 fragment
@@ -646,6 +696,7 @@ fragment
 DecimalFloatingConstant
     :   FractionalConstant ExponentPart? FloatingSuffix?
     |   DigitSequence ExponentPart FloatingSuffix?
+    |   DigitSequence '.' // Allow 6.
     ;
 
 fragment

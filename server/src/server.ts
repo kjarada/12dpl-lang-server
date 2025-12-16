@@ -29,6 +29,10 @@ import {
 	prototypesLoader
 } from './prototypes.js';
 
+import {
+	typeDocumentation
+} from './documentation.js';
+
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
 const connection = createConnection(ProposedFeatures.all);
@@ -224,8 +228,16 @@ connection.onCompletion(
 				data: 8
 			}
 		];
+
+		// Add type completions
+		const typeItems: CompletionItem[] = Object.keys(typeDocumentation).map(type => ({
+			label: type,
+			kind: CompletionItemKind.Class,
+			detail: '12dPL Type',
+			data: type
+		}));
 		
-		return [...keywordItems, ...prototypeItems];
+		return [...keywordItems, ...typeItems, ...prototypeItems];
 	}
 );
 
@@ -255,6 +267,16 @@ connection.onHover(
 						},
 						prototype.description || 'No description available'
 					]
+				};
+			}
+
+			// Check if it's a documented type
+			if (typeDocumentation[word]) {
+				return {
+					contents: {
+						kind: 'markdown',
+						value: typeDocumentation[word]
+					}
 				};
 			}
 
@@ -309,6 +331,15 @@ connection.onCompletionResolve(
 			item.documentation = {
 				kind: 'markdown',
 				value: prototypesLoader.generateDocumentation(prototype)
+			};
+			return item;
+		}
+
+		// Check if it's a documented type
+		if (typeDocumentation[item.label]) {
+			item.documentation = {
+				kind: 'markdown',
+				value: typeDocumentation[item.label]
 			};
 			return item;
 		}
