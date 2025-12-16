@@ -2,6 +2,12 @@
 	"name": "12dpl-lang-server",
 	"description": "A language server for 12dPL",
 	"author": "Ben Olsen",
+	"contributors": [
+		{
+			"name": "Kamal Jarada",
+			"email": "kamal.jarada@example.com"
+		}
+	],
 	"license": "MIT",
 	"displayName": "12dPL Language Server",
 	"version": "1.0.3",
