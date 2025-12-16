@@ -3,14 +3,14 @@ import {
 	DiagnosticSeverity,
 } from 'vscode-languageserver/node';
 
-import { CharStream, CommonTokenStream, RecognitionException }  from 'antlr4';
+import { CharStream, CommonTokenStream, RecognitionException, ErrorListener }  from 'antlr4';
 import proglang12dLexer from './antlr/proglang12dLexer';
 import proglang12dParser from './antlr/proglang12dParser';
 
-class DiagnosticErrorListener {
+class DiagnosticErrorListener extends ErrorListener<any> {
 	public diagnostics: Diagnostic[] = [];
 
-	syntaxError(recognizer: any, offendingSymbol: any, line: number, column: number, msg: string, e: RecognitionException): void {
+	syntaxError(recognizer: any, offendingSymbol: any, line: number, column: number, msg: string, e: RecognitionException | undefined): void {
 		this.diagnostics.push({
 			severity: DiagnosticSeverity.Error,
 			range: {
@@ -35,6 +35,7 @@ export class Validator {
 
 			// Set custom error listener
 			const errorListener = new DiagnosticErrorListener();
+			lexer.removeErrorListeners();
 			parser.removeErrorListeners();
 			parser.addErrorListener(errorListener);
 
@@ -42,19 +43,18 @@ export class Validator {
 			parser.compilationUnit();
 
 			return errorListener.diagnostics;
-		} catch (error) {
+		} catch (error: any) {
 			// Catch any unexpected errors during parsing
 			console.error('Validation error:', error);
-			if (diagnostics.length === 0) {
-				diagnostics.push({
-					severity: DiagnosticSeverity.Error,
-					range: {
-						start: { line: 0, character: 0 },
-						end: { line: 0, character: 1 }
-					},
-					message: 'Unable to parse document'
-				});
-			}
+			// Return the actual error message instead of generic message
+			diagnostics.push({
+				severity: DiagnosticSeverity.Warning,
+				range: {
+					start: { line: 0, character: 0 },
+					end: { line: 0, character: 1 }
+				},
+				message: error?.message || 'Parser error occurred'
+			});
 			return diagnostics;
 		}
 	}
