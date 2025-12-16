@@ -303,17 +303,38 @@ function getWordAtPosition(textDocument: TextDocument | undefined, position: any
 // the completion list.
 connection.onCompletionResolve(
 	(item: CompletionItem): CompletionItem => {
-		if (item.data === 1) {
-			item.documentation = 'Conditional: if (condition) { ... }';
-		} else if (item.data === 2) {
-			item.documentation = 'Else clause: else { ... }';
-		} else if (item.data === 3) {
-			item.documentation = 'While loop: while (condition) { ... }';
-		} else if (item.data === 4) {
-			item.documentation = 'For loop: for (init; condition; increment) { ... }';
-		} else if (item.data === 5) {
-			item.documentation = 'Return from function: return value;';
+		// Try to get documentation from prototypes
+		const prototype = prototypesLoader.getPrototype(item.label);
+		if (prototype) {
+			// Format with colorful markdown
+			const signature = prototypesLoader.getPrototypeSignature(item.label);
+			item.documentation = {
+				kind: 'markdown',
+				value: `\`\`\`12dpl\n${signature}\n\`\`\`\n\n${prototype.description || 'No description available'}`
+			};
+			return item;
 		}
+
+		// Fallback for keywords
+		const keywordDocs: Record<string, string> = {
+			'if': '**Conditional Statement**\n\nExecute code block if condition is true.\n\n```12dpl\nif (condition) { ... }\n```',
+			'else': '**Else Clause**\n\nExecute code block if if condition is false.\n\n```12dpl\nelse { ... }\n```',
+			'while': '**While Loop**\n\nRepeatedly execute code while condition is true.\n\n```12dpl\nwhile (condition) { ... }\n```',
+			'for': '**For Loop**\n\nLoop with init, condition, and increment.\n\n```12dpl\nfor (init; condition; increment) { ... }\n```',
+			'return': '**Return Statement**\n\nReturn a value from function.\n\n```12dpl\nreturn value;\n```',
+			'void': '**Void Type**\n\nNo return value',
+			'int': '**Integer Type**\n\nWhole number',
+			'double': '**Double Type**\n\nFloating-point number'
+		};
+
+		const keywordDoc = keywordDocs[item.label.toLowerCase()];
+		if (keywordDoc) {
+			item.documentation = {
+				kind: 'markdown',
+				value: keywordDoc
+			};
+		}
+
 		return item;
 	}
 );
