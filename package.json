@@ -26,7 +26,7 @@
 	},
 	"main": "./client/out/extension",
 	"activationEvents": [
-		"onLanguage:12dPL"
+		"onLanguage:12dpl"
 	],
 	"contributes": {
 		"languages": [
