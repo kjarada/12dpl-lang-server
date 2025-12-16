@@ -1,4 +1,4 @@
-// Generated from src/proglang12d.g4 by ANTLR 4.13.1
+// Generated from proglang12d.g4 by ANTLR 4.13.1
 
 import {ParseTreeVisitor} from 'antlr4';
 
@@ -27,14 +27,11 @@ import { AssignmentOperatorContext } from "./proglang12dParser";
 import { ExpressionContext } from "./proglang12dParser";
 import { ConstantExpressionContext } from "./proglang12dParser";
 import { DeclarationContext } from "./proglang12dParser";
-// import { InitDeclaratorListContext } from "./proglang12dParser";
-// import { InitDeclaratorContext } from "./proglang12dParser";
 import { DeclarationSpecifiersContext } from "./proglang12dParser";
 import { DeclarationSpecifiers2Context } from "./proglang12dParser";
 import { DeclarationSpecifierContext } from "./proglang12dParser";
 import { TypeSpecifierContext } from "./proglang12dParser";
 import { BuiltInTypeSpecifierContext } from "./proglang12dParser";
-// import { MapTypeContext } from "./proglang12dParser";
 import { SpecifierQualifierListContext } from "./proglang12dParser";
 import { DeclaratorContext } from "./proglang12dParser";
 import { DirectDeclaratorContext } from "./proglang12dParser";
@@ -44,7 +41,6 @@ import { ParameterListContext } from "./proglang12dParser";
 import { ParameterDeclarationContext } from "./proglang12dParser";
 import { IdentifierListContext } from "./proglang12dParser";
 import { TypeNameContext } from "./proglang12dParser";
-// import { AbstractDeclaratorContext } from "./proglang12dParser";
 import { DirectAbstractDeclaratorContext } from "./proglang12dParser";
 import { TypedefNameContext } from "./proglang12dParser";
 import { InitializerContext } from "./proglang12dParser";
@@ -224,18 +220,6 @@ export default class proglang12dVisitor<Result> extends ParseTreeVisitor<Result>
 	 */
 	visitDeclaration?: (ctx: DeclarationContext) => Result;
 	/**
-	 * Visit a parse tree produced by `proglang12dParser.initDeclaratorList`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitInitDeclaratorList?: (ctx: any) => Result;
-	/**
-	 * Visit a parse tree produced by `proglang12dParser.initDeclarator`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitInitDeclarator?: (ctx: any) => Result;
-	/**
 	 * Visit a parse tree produced by `proglang12dParser.declarationSpecifiers`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -265,12 +249,6 @@ export default class proglang12dVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitBuiltInTypeSpecifier?: (ctx: BuiltInTypeSpecifierContext) => Result;
-	/**
-	 * Visit a parse tree produced by `proglang12dParser.mapType`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitMapType?: (ctx: any) => Result;
 	/**
 	 * Visit a parse tree produced by `proglang12dParser.specifierQualifierList`.
 	 * @param ctx the parse tree
@@ -325,12 +303,6 @@ export default class proglang12dVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitTypeName?: (ctx: TypeNameContext) => Result;
-	/**
-	 * Visit a parse tree produced by `proglang12dParser.abstractDeclarator`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAbstractDeclarator?: (ctx: any) => Result;
 	/**
 	 * Visit a parse tree produced by `proglang12dParser.directAbstractDeclarator`.
 	 * @param ctx the parse tree

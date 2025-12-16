@@ -1,4 +1,4 @@
-// Generated from proglang12d.g4 by ANTLR 4.13.0
+// Generated from proglang12d.g4 by ANTLR 4.13.1
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import {
@@ -12,6 +12,8 @@ import {
 	Interval, IntervalSet
 } from 'antlr4';
 import proglang12dListener from "./proglang12dListener.js";
+import proglang12dVisitor from "./proglang12dVisitor.js";
+
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
 type int = number;
@@ -1691,12 +1693,35 @@ export default class proglang12dParser extends Parser {
 		let localctx: DeclarationContext = new DeclarationContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 46, proglang12dParser.RULE_declaration);
 		try {
-			this.enterOuterAlt(localctx, 1);
-			{
-			this.state = 307;
-			this.declarationSpecifiers();
-			this.state = 308;
-			this.match(proglang12dParser.Semi);
+			this.state = 317;
+			this._errHandler.sync(this);
+			switch ( this._interp.adaptivePredict(this._input, 24, this._ctx) ) {
+			case 1:
+				this.enterOuterAlt(localctx, 1);
+				{
+				this.state = 307;
+				this.declarationSpecifiers();
+				this.state = 308;
+				this.match(proglang12dParser.Identifier);
+				this.state = 309;
+				this.match(proglang12dParser.Semi);
+				}
+				break;
+			case 2:
+				this.enterOuterAlt(localctx, 2);
+				{
+				this.state = 311;
+				this.declarationSpecifiers();
+				this.state = 312;
+				this.match(proglang12dParser.Identifier);
+				this.state = 313;
+				this.match(proglang12dParser.Assign);
+				this.state = 314;
+				this.assignmentExpression();
+				this.state = 315;
+				this.match(proglang12dParser.Semi);
+				}
+				break;
 			}
 		}
 		catch (re) {
@@ -1721,17 +1746,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 311;
+			this.state = 320;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 310;
+				this.state = 319;
 				this.declarationSpecifier();
 				}
 				}
-				this.state = 313;
+				this.state = 322;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0));
@@ -1759,17 +1784,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 316;
+			this.state = 325;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 315;
+				this.state = 324;
 				this.declarationSpecifier();
 				}
 				}
-				this.state = 318;
+				this.state = 327;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0));
@@ -1794,7 +1819,7 @@ export default class proglang12dParser extends Parser {
 		let localctx: DeclarationSpecifierContext = new DeclarationSpecifierContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 52, proglang12dParser.RULE_declarationSpecifier);
 		try {
-			this.state = 322;
+			this.state = 331;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 127:
@@ -1803,7 +1828,7 @@ export default class proglang12dParser extends Parser {
 			case 139:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 320;
+				this.state = 329;
 				this.typeSpecifier();
 				}
 				break;
@@ -1927,7 +1952,7 @@ export default class proglang12dParser extends Parser {
 			case 120:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 321;
+				this.state = 330;
 				this.builtInTypeSpecifier();
 				}
 				break;
@@ -1957,7 +1982,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 324;
+			this.state = 333;
 			_la = this._input.LA(1);
 			if(!(((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 4641) !== 0))) {
 			this._errHandler.recoverInline(this);
@@ -1990,7 +2015,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 326;
+			this.state = 335;
 			_la = this._input.LA(1);
 			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 33554431) !== 0))) {
 			this._errHandler.recoverInline(this);
@@ -2023,14 +2048,14 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 328;
+			this.state = 337;
 			this.typeSpecifier();
-			this.state = 330;
+			this.state = 339;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 4641) !== 0)) {
 				{
-				this.state = 329;
+				this.state = 338;
 				this.specifierQualifierList();
 				}
 			}
@@ -2058,7 +2083,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 332;
+			this.state = 341;
 			this.directDeclarator(0);
 			}
 		}
@@ -2097,13 +2122,13 @@ export default class proglang12dParser extends Parser {
 			this.enterOuterAlt(localctx, 1);
 			{
 			{
-			this.state = 335;
+			this.state = 344;
 			this.match(proglang12dParser.Identifier);
 			}
 			this._ctx.stop = this._input.LT(-1);
-			this.state = 350;
+			this.state = 359;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 30, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 31, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					if (this._parseListeners != null) {
@@ -2111,22 +2136,22 @@ export default class proglang12dParser extends Parser {
 					}
 					_prevctx = localctx;
 					{
-					this.state = 348;
+					this.state = 357;
 					this._errHandler.sync(this);
-					switch ( this._interp.adaptivePredict(this._input, 29, this._ctx) ) {
+					switch ( this._interp.adaptivePredict(this._input, 30, this._ctx) ) {
 					case 1:
 						{
 						localctx = new DirectDeclaratorContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, proglang12dParser.RULE_directDeclarator);
-						this.state = 337;
+						this.state = 346;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 						}
-						this.state = 338;
+						this.state = 347;
 						this.match(proglang12dParser.LeftParen);
-						this.state = 339;
+						this.state = 348;
 						this.parameterTypeList();
-						this.state = 340;
+						this.state = 349;
 						this.match(proglang12dParser.RightParen);
 						}
 						break;
@@ -2134,32 +2159,32 @@ export default class proglang12dParser extends Parser {
 						{
 						localctx = new DirectDeclaratorContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, proglang12dParser.RULE_directDeclarator);
-						this.state = 342;
+						this.state = 351;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
-						this.state = 343;
+						this.state = 352;
 						this.match(proglang12dParser.LeftParen);
-						this.state = 345;
+						this.state = 354;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 						if (_la===185) {
 							{
-							this.state = 344;
+							this.state = 353;
 							this.identifierList();
 							}
 						}
 
-						this.state = 347;
+						this.state = 356;
 						this.match(proglang12dParser.RightParen);
 						}
 						break;
 					}
 					}
 				}
-				this.state = 352;
+				this.state = 361;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 30, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 31, this._ctx);
 			}
 			}
 		}
@@ -2185,12 +2210,12 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 360;
+			this.state = 369;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967294) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 4294967295) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 4294950911) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 4294967295) !== 0) || ((((_la - 192)) & ~0x1F) === 0 && ((1 << (_la - 192)) & 127) !== 0)) {
 				{
-				this.state = 358;
+				this.state = 367;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
 				case 1:
@@ -2390,7 +2415,7 @@ export default class proglang12dParser extends Parser {
 				case 197:
 				case 198:
 					{
-					this.state = 353;
+					this.state = 362;
 					_la = this._input.LA(1);
 					if(_la<=0 || _la===141 || _la===142) {
 					this._errHandler.recoverInline(this);
@@ -2403,11 +2428,11 @@ export default class proglang12dParser extends Parser {
 					break;
 				case 141:
 					{
-					this.state = 354;
+					this.state = 363;
 					this.match(proglang12dParser.LeftParen);
-					this.state = 355;
+					this.state = 364;
 					this.nestedParenthesesBlock();
-					this.state = 356;
+					this.state = 365;
 					this.match(proglang12dParser.RightParen);
 					}
 					break;
@@ -2415,7 +2440,7 @@ export default class proglang12dParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				this.state = 362;
+				this.state = 371;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -2443,16 +2468,16 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 363;
+			this.state = 372;
 			this.parameterList();
-			this.state = 366;
+			this.state = 375;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===169) {
 				{
-				this.state = 364;
+				this.state = 373;
 				this.match(proglang12dParser.Comma);
-				this.state = 365;
+				this.state = 374;
 				this.match(proglang12dParser.Ellipsis);
 				}
 			}
@@ -2481,25 +2506,25 @@ export default class proglang12dParser extends Parser {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 368;
+			this.state = 377;
 			this.parameterDeclaration();
-			this.state = 373;
+			this.state = 382;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 34, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 35, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 369;
+					this.state = 378;
 					this.match(proglang12dParser.Comma);
-					this.state = 370;
+					this.state = 379;
 					this.parameterDeclaration();
 					}
 					}
 				}
-				this.state = 375;
+				this.state = 384;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 34, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 35, this._ctx);
 			}
 			}
 		}
@@ -2521,11 +2546,39 @@ export default class proglang12dParser extends Parser {
 	public parameterDeclaration(): ParameterDeclarationContext {
 		let localctx: ParameterDeclarationContext = new ParameterDeclarationContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 70, proglang12dParser.RULE_parameterDeclaration);
+		let _la: number;
 		try {
-			this.enterOuterAlt(localctx, 1);
-			{
-			this.state = 376;
-			this.declarationSpecifiers2();
+			this.state = 393;
+			this._errHandler.sync(this);
+			switch ( this._interp.adaptivePredict(this._input, 37, this._ctx) ) {
+			case 1:
+				this.enterOuterAlt(localctx, 1);
+				{
+				this.state = 385;
+				this.declarationSpecifiers2();
+				this.state = 387;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la===185) {
+					{
+					this.state = 386;
+					this.match(proglang12dParser.Identifier);
+					}
+				}
+
+				}
+				break;
+			case 2:
+				this.enterOuterAlt(localctx, 2);
+				{
+				this.state = 389;
+				this.declarationSpecifiers2();
+				this.state = 390;
+				this.match(proglang12dParser.And);
+				this.state = 391;
+				this.match(proglang12dParser.Identifier);
+				}
+				break;
 			}
 		}
 		catch (re) {
@@ -2550,21 +2603,21 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 378;
+			this.state = 395;
 			this.match(proglang12dParser.Identifier);
-			this.state = 383;
+			this.state = 400;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===169) {
 				{
 				{
-				this.state = 379;
+				this.state = 396;
 				this.match(proglang12dParser.Comma);
-				this.state = 380;
+				this.state = 397;
 				this.match(proglang12dParser.Identifier);
 				}
 				}
-				this.state = 385;
+				this.state = 402;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -2591,7 +2644,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 386;
+			this.state = 403;
 			this.specifierQualifierList();
 			}
 		}
@@ -2630,17 +2683,17 @@ export default class proglang12dParser extends Parser {
 			this.enterOuterAlt(localctx, 1);
 			{
 			{
-			this.state = 389;
+			this.state = 406;
 			this.match(proglang12dParser.LeftBracket);
-			this.state = 390;
+			this.state = 407;
 			this.match(proglang12dParser.Star);
-			this.state = 391;
+			this.state = 408;
 			this.match(proglang12dParser.RightBracket);
 			}
 			this._ctx.stop = this._input.LT(-1);
-			this.state = 405;
+			this.state = 422;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 38, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 41, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					if (this._parseListeners != null) {
@@ -2648,30 +2701,30 @@ export default class proglang12dParser extends Parser {
 					}
 					_prevctx = localctx;
 					{
-					this.state = 403;
+					this.state = 420;
 					this._errHandler.sync(this);
-					switch ( this._interp.adaptivePredict(this._input, 37, this._ctx) ) {
+					switch ( this._interp.adaptivePredict(this._input, 40, this._ctx) ) {
 					case 1:
 						{
 						localctx = new DirectAbstractDeclaratorContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, proglang12dParser.RULE_directAbstractDeclarator);
-						this.state = 393;
+						this.state = 410;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 						}
-						this.state = 394;
+						this.state = 411;
 						this.match(proglang12dParser.LeftBracket);
-						this.state = 396;
+						this.state = 413;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 						if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 							{
-							this.state = 395;
+							this.state = 412;
 							this.assignmentExpression();
 							}
 						}
 
-						this.state = 398;
+						this.state = 415;
 						this.match(proglang12dParser.RightBracket);
 						}
 						break;
@@ -2679,24 +2732,24 @@ export default class proglang12dParser extends Parser {
 						{
 						localctx = new DirectAbstractDeclaratorContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, proglang12dParser.RULE_directAbstractDeclarator);
-						this.state = 399;
+						this.state = 416;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
-						this.state = 400;
+						this.state = 417;
 						this.match(proglang12dParser.LeftBracket);
-						this.state = 401;
+						this.state = 418;
 						this.match(proglang12dParser.Star);
-						this.state = 402;
+						this.state = 419;
 						this.match(proglang12dParser.RightBracket);
 						}
 						break;
 					}
 					}
 				}
-				this.state = 407;
+				this.state = 424;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 38, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 41, this._ctx);
 			}
 			}
 		}
@@ -2721,7 +2774,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 408;
+			this.state = 425;
 			this.match(proglang12dParser.Identifier);
 			}
 		}
@@ -2745,7 +2798,7 @@ export default class proglang12dParser extends Parser {
 		this.enterRule(localctx, 80, proglang12dParser.RULE_initializer);
 		let _la: number;
 		try {
-			this.state = 418;
+			this.state = 435;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 2:
@@ -2764,28 +2817,28 @@ export default class proglang12dParser extends Parser {
 			case 188:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 410;
+				this.state = 427;
 				this.assignmentExpression();
 				}
 				break;
 			case 145:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 411;
+				this.state = 428;
 				this.match(proglang12dParser.LeftBrace);
-				this.state = 412;
+				this.state = 429;
 				this.initializerList();
-				this.state = 414;
+				this.state = 431;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===169) {
 					{
-					this.state = 413;
+					this.state = 430;
 					this.match(proglang12dParser.Comma);
 					}
 				}
 
-				this.state = 416;
+				this.state = 433;
 				this.match(proglang12dParser.RightBrace);
 				}
 				break;
@@ -2816,45 +2869,45 @@ export default class proglang12dParser extends Parser {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 421;
+			this.state = 438;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===143 || _la===183) {
 				{
-				this.state = 420;
+				this.state = 437;
 				this.designation();
 				}
 			}
 
-			this.state = 423;
+			this.state = 440;
 			this.initializer();
-			this.state = 431;
+			this.state = 448;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 43, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 46, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 424;
+					this.state = 441;
 					this.match(proglang12dParser.Comma);
-					this.state = 426;
+					this.state = 443;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					if (_la===143 || _la===183) {
 						{
-						this.state = 425;
+						this.state = 442;
 						this.designation();
 						}
 					}
 
-					this.state = 428;
+					this.state = 445;
 					this.initializer();
 					}
 					}
 				}
-				this.state = 433;
+				this.state = 450;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 43, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 46, this._ctx);
 			}
 			}
 		}
@@ -2879,9 +2932,9 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 434;
+			this.state = 451;
 			this.designatorList();
-			this.state = 435;
+			this.state = 452;
 			this.match(proglang12dParser.Assign);
 			}
 		}
@@ -2907,17 +2960,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 438;
+			this.state = 455;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 437;
+				this.state = 454;
 				this.designator();
 				}
 				}
-				this.state = 440;
+				this.state = 457;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while (_la===143 || _la===183);
@@ -2942,26 +2995,26 @@ export default class proglang12dParser extends Parser {
 		let localctx: DesignatorContext = new DesignatorContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 88, proglang12dParser.RULE_designator);
 		try {
-			this.state = 448;
+			this.state = 465;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 143:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 442;
+				this.state = 459;
 				this.match(proglang12dParser.LeftBracket);
-				this.state = 443;
+				this.state = 460;
 				this.constantExpression();
-				this.state = 444;
+				this.state = 461;
 				this.match(proglang12dParser.RightBracket);
 				}
 				break;
 			case 183:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 446;
+				this.state = 463;
 				this.match(proglang12dParser.Dot);
-				this.state = 447;
+				this.state = 464;
 				this.match(proglang12dParser.Identifier);
 				}
 				break;
@@ -2989,55 +3042,55 @@ export default class proglang12dParser extends Parser {
 		this.enterRule(localctx, 90, proglang12dParser.RULE_statement);
 		let _la: number;
 		try {
-			this.state = 487;
+			this.state = 504;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 51, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 54, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 450;
+				this.state = 467;
 				this.labeledStatement();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 451;
+				this.state = 468;
 				this.compoundStatement();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 452;
+				this.state = 469;
 				this.expressionStatement();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 453;
+				this.state = 470;
 				this.selectionStatement();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 454;
+				this.state = 471;
 				this.iterationStatement();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 455;
+				this.state = 472;
 				this.jumpStatement();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 456;
+				this.state = 473;
 				_la = this._input.LA(1);
 				if(!(_la===121 || _la===122)) {
 				this._errHandler.recoverInline(this);
@@ -3046,7 +3099,7 @@ export default class proglang12dParser extends Parser {
 					this._errHandler.reportMatch(this);
 				    this.consume();
 				}
-				this.state = 457;
+				this.state = 474;
 				_la = this._input.LA(1);
 				if(!(_la===123 || _la===124)) {
 				this._errHandler.recoverInline(this);
@@ -3055,62 +3108,62 @@ export default class proglang12dParser extends Parser {
 					this._errHandler.reportMatch(this);
 				    this.consume();
 				}
-				this.state = 458;
+				this.state = 475;
 				this.match(proglang12dParser.LeftParen);
-				this.state = 467;
+				this.state = 484;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 					{
-					this.state = 459;
+					this.state = 476;
 					this.logicalOrExpression();
-					this.state = 464;
+					this.state = 481;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					while (_la===169) {
 						{
 						{
-						this.state = 460;
+						this.state = 477;
 						this.match(proglang12dParser.Comma);
-						this.state = 461;
+						this.state = 478;
 						this.logicalOrExpression();
 						}
 						}
-						this.state = 466;
+						this.state = 483;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 					}
 					}
 				}
 
-				this.state = 482;
+				this.state = 499;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===167) {
 					{
 					{
-					this.state = 469;
+					this.state = 486;
 					this.match(proglang12dParser.Colon);
-					this.state = 478;
+					this.state = 495;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 						{
-						this.state = 470;
+						this.state = 487;
 						this.logicalOrExpression();
-						this.state = 475;
+						this.state = 492;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 						while (_la===169) {
 							{
 							{
-							this.state = 471;
+							this.state = 488;
 							this.match(proglang12dParser.Comma);
-							this.state = 472;
+							this.state = 489;
 							this.logicalOrExpression();
 							}
 							}
-							this.state = 477;
+							this.state = 494;
 							this._errHandler.sync(this);
 							_la = this._input.LA(1);
 						}
@@ -3119,13 +3172,13 @@ export default class proglang12dParser extends Parser {
 
 					}
 					}
-					this.state = 484;
+					this.state = 501;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 485;
+				this.state = 502;
 				this.match(proglang12dParser.RightParen);
-				this.state = 486;
+				this.state = 503;
 				this.match(proglang12dParser.Semi);
 				}
 				break;
@@ -3150,41 +3203,41 @@ export default class proglang12dParser extends Parser {
 		let localctx: LabeledStatementContext = new LabeledStatementContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 92, proglang12dParser.RULE_labeledStatement);
 		try {
-			this.state = 500;
+			this.state = 517;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 185:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 489;
+				this.state = 506;
 				this.match(proglang12dParser.Identifier);
-				this.state = 490;
+				this.state = 507;
 				this.match(proglang12dParser.Colon);
-				this.state = 491;
+				this.state = 508;
 				this.statement();
 				}
 				break;
 			case 126:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 492;
+				this.state = 509;
 				this.match(proglang12dParser.Case);
-				this.state = 493;
+				this.state = 510;
 				this.constantExpression();
-				this.state = 494;
+				this.state = 511;
 				this.match(proglang12dParser.Colon);
-				this.state = 495;
+				this.state = 512;
 				this.statement();
 				}
 				break;
 			case 129:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 497;
+				this.state = 514;
 				this.match(proglang12dParser.Default);
-				this.state = 498;
+				this.state = 515;
 				this.match(proglang12dParser.Colon);
-				this.state = 499;
+				this.state = 516;
 				this.statement();
 				}
 				break;
@@ -3214,19 +3267,19 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 502;
+			this.state = 519;
 			this.match(proglang12dParser.LeftBrace);
-			this.state = 504;
+			this.state = 521;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967292) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 3892314111) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 1040334839) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 503316773) !== 0)) {
 				{
-				this.state = 503;
+				this.state = 520;
 				this.blockItemList();
 				}
 			}
 
-			this.state = 506;
+			this.state = 523;
 			this.match(proglang12dParser.RightBrace);
 			}
 		}
@@ -3252,17 +3305,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 509;
+			this.state = 526;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 508;
+				this.state = 525;
 				this.blockItem();
 				}
 				}
-				this.state = 511;
+				this.state = 528;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967292) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 3892314111) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 1040334839) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 503316773) !== 0));
@@ -3287,7 +3340,7 @@ export default class proglang12dParser extends Parser {
 		let localctx: BlockItemContext = new BlockItemContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 98, proglang12dParser.RULE_blockItem);
 		try {
-			this.state = 515;
+			this.state = 532;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 2:
@@ -3321,7 +3374,7 @@ export default class proglang12dParser extends Parser {
 			case 188:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 513;
+				this.state = 530;
 				this.statement();
 				}
 				break;
@@ -3449,7 +3502,7 @@ export default class proglang12dParser extends Parser {
 			case 139:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 514;
+				this.state = 531;
 				this.declaration();
 				}
 				break;
@@ -3479,17 +3532,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 518;
+			this.state = 535;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 				{
-				this.state = 517;
+				this.state = 534;
 				this.expression();
 				}
 			}
 
-			this.state = 520;
+			this.state = 537;
 			this.match(proglang12dParser.Semi);
 			}
 		}
@@ -3512,30 +3565,30 @@ export default class proglang12dParser extends Parser {
 		let localctx: SelectionStatementContext = new SelectionStatementContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 102, proglang12dParser.RULE_selectionStatement);
 		try {
-			this.state = 537;
+			this.state = 554;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 135:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 522;
+				this.state = 539;
 				this.match(proglang12dParser.If);
-				this.state = 523;
+				this.state = 540;
 				this.match(proglang12dParser.LeftParen);
-				this.state = 524;
+				this.state = 541;
 				this.expression();
-				this.state = 525;
+				this.state = 542;
 				this.match(proglang12dParser.RightParen);
-				this.state = 526;
+				this.state = 543;
 				this.statement();
-				this.state = 529;
+				this.state = 546;
 				this._errHandler.sync(this);
-				switch ( this._interp.adaptivePredict(this._input, 57, this._ctx) ) {
+				switch ( this._interp.adaptivePredict(this._input, 60, this._ctx) ) {
 				case 1:
 					{
-					this.state = 527;
+					this.state = 544;
 					this.match(proglang12dParser.Else);
-					this.state = 528;
+					this.state = 545;
 					this.statement();
 					}
 					break;
@@ -3545,15 +3598,15 @@ export default class proglang12dParser extends Parser {
 			case 138:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 531;
+				this.state = 548;
 				this.match(proglang12dParser.Switch);
-				this.state = 532;
+				this.state = 549;
 				this.match(proglang12dParser.LeftParen);
-				this.state = 533;
+				this.state = 550;
 				this.expression();
-				this.state = 534;
+				this.state = 551;
 				this.match(proglang12dParser.RightParen);
-				this.state = 535;
+				this.state = 552;
 				this.statement();
 				}
 				break;
@@ -3580,55 +3633,55 @@ export default class proglang12dParser extends Parser {
 		let localctx: IterationStatementContext = new IterationStatementContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 104, proglang12dParser.RULE_iterationStatement);
 		try {
-			this.state = 559;
+			this.state = 576;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 140:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 539;
+				this.state = 556;
 				this.match(proglang12dParser.While);
-				this.state = 540;
+				this.state = 557;
 				this.match(proglang12dParser.LeftParen);
-				this.state = 541;
+				this.state = 558;
 				this.expression();
-				this.state = 542;
+				this.state = 559;
 				this.match(proglang12dParser.RightParen);
-				this.state = 543;
+				this.state = 560;
 				this.statement();
 				}
 				break;
 			case 130:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 545;
+				this.state = 562;
 				this.match(proglang12dParser.Do);
-				this.state = 546;
+				this.state = 563;
 				this.statement();
-				this.state = 547;
+				this.state = 564;
 				this.match(proglang12dParser.While);
-				this.state = 548;
+				this.state = 565;
 				this.match(proglang12dParser.LeftParen);
-				this.state = 549;
+				this.state = 566;
 				this.expression();
-				this.state = 550;
+				this.state = 567;
 				this.match(proglang12dParser.RightParen);
-				this.state = 551;
+				this.state = 568;
 				this.match(proglang12dParser.Semi);
 				}
 				break;
 			case 133:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 553;
+				this.state = 570;
 				this.match(proglang12dParser.For);
-				this.state = 554;
+				this.state = 571;
 				this.match(proglang12dParser.LeftParen);
-				this.state = 555;
+				this.state = 572;
 				this.forCondition();
-				this.state = 556;
+				this.state = 573;
 				this.match(proglang12dParser.RightParen);
-				this.state = 557;
+				this.state = 574;
 				this.statement();
 				}
 				break;
@@ -3658,7 +3711,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 565;
+			this.state = 582;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 3:
@@ -3784,7 +3837,7 @@ export default class proglang12dParser extends Parser {
 			case 136:
 			case 139:
 				{
-				this.state = 561;
+				this.state = 578;
 				this.forDeclaration();
 				}
 				break;
@@ -3804,12 +3857,12 @@ export default class proglang12dParser extends Parser {
 			case 187:
 			case 188:
 				{
-				this.state = 563;
+				this.state = 580;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 					{
-					this.state = 562;
+					this.state = 579;
 					this.expression();
 					}
 				}
@@ -3819,26 +3872,26 @@ export default class proglang12dParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 567;
+			this.state = 584;
 			this.match(proglang12dParser.Semi);
-			this.state = 569;
+			this.state = 586;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 				{
-				this.state = 568;
+				this.state = 585;
 				this.forExpression();
 				}
 			}
 
-			this.state = 571;
+			this.state = 588;
 			this.match(proglang12dParser.Semi);
-			this.state = 573;
+			this.state = 590;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 				{
-				this.state = 572;
+				this.state = 589;
 				this.forExpression();
 				}
 			}
@@ -3866,7 +3919,7 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 575;
+			this.state = 592;
 			this.declarationSpecifiers();
 			}
 		}
@@ -3892,21 +3945,21 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 577;
+			this.state = 594;
 			this.assignmentExpression();
-			this.state = 582;
+			this.state = 599;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===169) {
 				{
 				{
-				this.state = 578;
+				this.state = 595;
 				this.match(proglang12dParser.Comma);
-				this.state = 579;
+				this.state = 596;
 				this.assignmentExpression();
 				}
 				}
-				this.state = 584;
+				this.state = 601;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -3934,39 +3987,39 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 595;
+			this.state = 612;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 66, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 69, this._ctx) ) {
 			case 1:
 				{
-				this.state = 585;
+				this.state = 602;
 				this.match(proglang12dParser.Goto);
-				this.state = 586;
+				this.state = 603;
 				this.match(proglang12dParser.Identifier);
 				}
 				break;
 			case 2:
 				{
-				this.state = 587;
+				this.state = 604;
 				this.match(proglang12dParser.Continue);
 				}
 				break;
 			case 3:
 				{
-				this.state = 588;
+				this.state = 605;
 				this.match(proglang12dParser.Break);
 				}
 				break;
 			case 4:
 				{
-				this.state = 589;
+				this.state = 606;
 				this.match(proglang12dParser.Return);
-				this.state = 591;
+				this.state = 608;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===2 || ((((_la - 141)) & ~0x1F) === 0 && ((1 << (_la - 141)) & 19525633) !== 0) || ((((_la - 185)) & ~0x1F) === 0 && ((1 << (_la - 185)) & 15) !== 0)) {
 					{
-					this.state = 590;
+					this.state = 607;
 					this.expression();
 					}
 				}
@@ -3975,14 +4028,14 @@ export default class proglang12dParser extends Parser {
 				break;
 			case 5:
 				{
-				this.state = 593;
+				this.state = 610;
 				this.match(proglang12dParser.Goto);
-				this.state = 594;
+				this.state = 611;
 				this.unaryExpression();
 				}
 				break;
 			}
-			this.state = 597;
+			this.state = 614;
 			this.match(proglang12dParser.Semi);
 			}
 		}
@@ -4008,17 +4061,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 600;
+			this.state = 617;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0) || _la===168 || _la===185) {
 				{
-				this.state = 599;
+				this.state = 616;
 				this.translationUnit();
 				}
 			}
 
-			this.state = 602;
+			this.state = 619;
 			this.match(proglang12dParser.EOF);
 			}
 		}
@@ -4044,17 +4097,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 605;
+			this.state = 622;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 604;
+				this.state = 621;
 				this.externalDeclaration();
 				}
 				}
-				this.state = 607;
+				this.state = 624;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0) || _la===168 || _la===185);
@@ -4079,27 +4132,27 @@ export default class proglang12dParser extends Parser {
 		let localctx: ExternalDeclarationContext = new ExternalDeclarationContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 118, proglang12dParser.RULE_externalDeclaration);
 		try {
-			this.state = 612;
+			this.state = 629;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 69, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 72, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 609;
+				this.state = 626;
 				this.functionDefinition();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 610;
+				this.state = 627;
 				this.declaration();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 611;
+				this.state = 628;
 				this.match(proglang12dParser.Semi);
 				}
 				break;
@@ -4127,29 +4180,29 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 615;
+			this.state = 632;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0)) {
 				{
-				this.state = 614;
+				this.state = 631;
 				this.declarationSpecifiers();
 				}
 			}
 
-			this.state = 617;
+			this.state = 634;
 			this.declarator();
-			this.state = 619;
+			this.state = 636;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0)) {
 				{
-				this.state = 618;
+				this.state = 635;
 				this.declarationList();
 				}
 			}
 
-			this.state = 621;
+			this.state = 638;
 			this.compoundStatement();
 			}
 		}
@@ -4175,17 +4228,17 @@ export default class proglang12dParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 624;
+			this.state = 641;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 623;
+				this.state = 640;
 				this.declaration();
 				}
 				}
-				this.state = 626;
+				this.state = 643;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 2181038079) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 145) !== 0));
@@ -4234,7 +4287,7 @@ export default class proglang12dParser extends Parser {
 		return true;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,198,629,2,0,7,0,
+	public static readonly _serializedATN: number[] = [4,1,198,646,2,0,7,0,
 	2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,
 	2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,
 	17,7,17,2,18,7,18,2,19,7,19,2,20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,
@@ -4257,194 +4310,200 @@ export default class proglang12dParser extends Parser {
 	8,16,10,16,12,16,270,9,16,1,17,1,17,1,17,5,17,275,8,17,10,17,12,17,278,
 	9,17,1,18,1,18,1,18,1,18,1,18,1,18,3,18,286,8,18,1,19,1,19,1,19,1,19,1,
 	19,1,19,3,19,294,8,19,1,20,1,20,1,21,1,21,1,21,5,21,301,8,21,10,21,12,21,
-	304,9,21,1,22,1,22,1,23,1,23,1,23,1,24,4,24,312,8,24,11,24,12,24,313,1,
-	25,4,25,317,8,25,11,25,12,25,318,1,26,1,26,3,26,323,8,26,1,27,1,27,1,28,
-	1,28,1,29,1,29,3,29,331,8,29,1,30,1,30,1,31,1,31,1,31,1,31,1,31,1,31,1,
-	31,1,31,1,31,1,31,1,31,3,31,346,8,31,1,31,5,31,349,8,31,10,31,12,31,352,
-	9,31,1,32,1,32,1,32,1,32,1,32,5,32,359,8,32,10,32,12,32,362,9,32,1,33,1,
-	33,1,33,3,33,367,8,33,1,34,1,34,1,34,5,34,372,8,34,10,34,12,34,375,9,34,
-	1,35,1,35,1,36,1,36,1,36,5,36,382,8,36,10,36,12,36,385,9,36,1,37,1,37,1,
-	38,1,38,1,38,1,38,1,38,1,38,1,38,1,38,3,38,397,8,38,1,38,1,38,1,38,1,38,
-	1,38,5,38,404,8,38,10,38,12,38,407,9,38,1,39,1,39,1,40,1,40,1,40,1,40,3,
-	40,415,8,40,1,40,1,40,3,40,419,8,40,1,41,3,41,422,8,41,1,41,1,41,1,41,3,
-	41,427,8,41,1,41,5,41,430,8,41,10,41,12,41,433,9,41,1,42,1,42,1,42,1,43,
-	4,43,439,8,43,11,43,12,43,440,1,44,1,44,1,44,1,44,1,44,1,44,3,44,449,8,
-	44,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,5,45,463,
-	8,45,10,45,12,45,466,9,45,3,45,468,8,45,1,45,1,45,1,45,1,45,5,45,474,8,
-	45,10,45,12,45,477,9,45,3,45,479,8,45,5,45,481,8,45,10,45,12,45,484,9,45,
-	1,45,1,45,3,45,488,8,45,1,46,1,46,1,46,1,46,1,46,1,46,1,46,1,46,1,46,1,
-	46,1,46,3,46,501,8,46,1,47,1,47,3,47,505,8,47,1,47,1,47,1,48,4,48,510,8,
-	48,11,48,12,48,511,1,49,1,49,3,49,516,8,49,1,50,3,50,519,8,50,1,50,1,50,
-	1,51,1,51,1,51,1,51,1,51,1,51,1,51,3,51,530,8,51,1,51,1,51,1,51,1,51,1,
-	51,1,51,3,51,538,8,51,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,
-	1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,3,52,560,8,52,1,53,1,
-	53,3,53,564,8,53,3,53,566,8,53,1,53,1,53,3,53,570,8,53,1,53,1,53,3,53,574,
-	8,53,1,54,1,54,1,55,1,55,1,55,5,55,581,8,55,10,55,12,55,584,9,55,1,56,1,
-	56,1,56,1,56,1,56,1,56,3,56,592,8,56,1,56,1,56,3,56,596,8,56,1,56,1,56,
-	1,57,3,57,601,8,57,1,57,1,57,1,58,4,58,606,8,58,11,58,12,58,607,1,59,1,
-	59,1,59,3,59,613,8,59,1,60,3,60,616,8,60,1,60,1,60,3,60,620,8,60,1,60,1,
-	60,1,61,4,61,625,8,61,11,61,12,61,626,1,61,0,2,62,76,62,0,2,4,6,8,10,12,
-	14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,
-	62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,
-	108,110,112,114,116,118,120,122,0,14,2,0,1,1,183,183,2,0,154,154,156,156,
-	6,0,2,2,153,153,155,155,157,157,160,160,165,165,1,0,157,159,2,0,153,153,
-	155,155,1,0,151,152,1,0,147,150,1,0,181,182,1,0,170,180,4,0,127,127,132,
-	132,136,136,139,139,1,0,3,120,1,0,141,142,1,0,121,122,1,0,123,124,657,0,
-	135,1,0,0,0,2,137,1,0,0,0,4,147,1,0,0,0,6,152,1,0,0,0,8,171,1,0,0,0,10,
-	182,1,0,0,0,12,193,1,0,0,0,14,197,1,0,0,0,16,199,1,0,0,0,18,207,1,0,0,0,
-	20,215,1,0,0,0,22,223,1,0,0,0,24,231,1,0,0,0,26,239,1,0,0,0,28,247,1,0,
-	0,0,30,255,1,0,0,0,32,263,1,0,0,0,34,271,1,0,0,0,36,279,1,0,0,0,38,293,
-	1,0,0,0,40,295,1,0,0,0,42,297,1,0,0,0,44,305,1,0,0,0,46,307,1,0,0,0,48,
-	311,1,0,0,0,50,316,1,0,0,0,52,322,1,0,0,0,54,324,1,0,0,0,56,326,1,0,0,0,
-	58,328,1,0,0,0,60,332,1,0,0,0,62,334,1,0,0,0,64,360,1,0,0,0,66,363,1,0,
-	0,0,68,368,1,0,0,0,70,376,1,0,0,0,72,378,1,0,0,0,74,386,1,0,0,0,76,388,
-	1,0,0,0,78,408,1,0,0,0,80,418,1,0,0,0,82,421,1,0,0,0,84,434,1,0,0,0,86,
-	438,1,0,0,0,88,448,1,0,0,0,90,487,1,0,0,0,92,500,1,0,0,0,94,502,1,0,0,0,
-	96,509,1,0,0,0,98,515,1,0,0,0,100,518,1,0,0,0,102,537,1,0,0,0,104,559,1,
-	0,0,0,106,565,1,0,0,0,108,575,1,0,0,0,110,577,1,0,0,0,112,595,1,0,0,0,114,
-	600,1,0,0,0,116,605,1,0,0,0,118,612,1,0,0,0,120,615,1,0,0,0,122,624,1,0,
-	0,0,124,136,5,185,0,0,125,136,5,186,0,0,126,128,5,188,0,0,127,126,1,0,0,
-	0,128,129,1,0,0,0,129,127,1,0,0,0,129,130,1,0,0,0,130,136,1,0,0,0,131,132,
-	5,141,0,0,132,133,3,42,21,0,133,134,5,142,0,0,134,136,1,0,0,0,135,124,1,
-	0,0,0,135,125,1,0,0,0,135,127,1,0,0,0,135,131,1,0,0,0,136,1,1,0,0,0,137,
-	142,3,4,2,0,138,139,5,169,0,0,139,141,3,4,2,0,140,138,1,0,0,0,141,144,1,
-	0,0,0,142,140,1,0,0,0,142,143,1,0,0,0,143,3,1,0,0,0,144,142,1,0,0,0,145,
-	148,3,74,37,0,146,148,5,129,0,0,147,145,1,0,0,0,147,146,1,0,0,0,148,149,
-	1,0,0,0,149,150,5,167,0,0,150,151,3,38,19,0,151,5,1,0,0,0,152,168,3,0,0,
-	0,153,154,5,143,0,0,154,155,3,42,21,0,155,156,5,144,0,0,156,167,1,0,0,0,
-	157,159,5,141,0,0,158,160,3,8,4,0,159,158,1,0,0,0,159,160,1,0,0,0,160,161,
-	1,0,0,0,161,167,5,142,0,0,162,163,7,0,0,0,163,167,5,185,0,0,164,167,5,154,
-	0,0,165,167,5,156,0,0,166,153,1,0,0,0,166,157,1,0,0,0,166,162,1,0,0,0,166,
-	164,1,0,0,0,166,165,1,0,0,0,167,170,1,0,0,0,168,166,1,0,0,0,168,169,1,0,
-	0,0,169,7,1,0,0,0,170,168,1,0,0,0,171,176,3,38,19,0,172,173,5,169,0,0,173,
-	175,3,38,19,0,174,172,1,0,0,0,175,178,1,0,0,0,176,174,1,0,0,0,176,177,1,
-	0,0,0,177,9,1,0,0,0,178,176,1,0,0,0,179,181,7,1,0,0,180,179,1,0,0,0,181,
-	184,1,0,0,0,182,180,1,0,0,0,182,183,1,0,0,0,183,191,1,0,0,0,184,182,1,0,
-	0,0,185,192,3,6,3,0,186,187,3,12,6,0,187,188,3,14,7,0,188,192,1,0,0,0,189,
-	190,5,162,0,0,190,192,5,185,0,0,191,185,1,0,0,0,191,186,1,0,0,0,191,189,
-	1,0,0,0,192,11,1,0,0,0,193,194,7,2,0,0,194,13,1,0,0,0,195,198,3,10,5,0,
-	196,198,5,187,0,0,197,195,1,0,0,0,197,196,1,0,0,0,198,15,1,0,0,0,199,204,
-	3,14,7,0,200,201,7,3,0,0,201,203,3,14,7,0,202,200,1,0,0,0,203,206,1,0,0,
-	0,204,202,1,0,0,0,204,205,1,0,0,0,205,17,1,0,0,0,206,204,1,0,0,0,207,212,
-	3,16,8,0,208,209,7,4,0,0,209,211,3,16,8,0,210,208,1,0,0,0,211,214,1,0,0,
-	0,212,210,1,0,0,0,212,213,1,0,0,0,213,19,1,0,0,0,214,212,1,0,0,0,215,220,
-	3,18,9,0,216,217,7,5,0,0,217,219,3,18,9,0,218,216,1,0,0,0,219,222,1,0,0,
-	0,220,218,1,0,0,0,220,221,1,0,0,0,221,21,1,0,0,0,222,220,1,0,0,0,223,228,
-	3,20,10,0,224,225,7,6,0,0,225,227,3,20,10,0,226,224,1,0,0,0,227,230,1,0,
-	0,0,228,226,1,0,0,0,228,229,1,0,0,0,229,23,1,0,0,0,230,228,1,0,0,0,231,
-	236,3,22,11,0,232,233,7,7,0,0,233,235,3,22,11,0,234,232,1,0,0,0,235,238,
-	1,0,0,0,236,234,1,0,0,0,236,237,1,0,0,0,237,25,1,0,0,0,238,236,1,0,0,0,
-	239,244,3,24,12,0,240,241,5,160,0,0,241,243,3,24,12,0,242,240,1,0,0,0,243,
-	246,1,0,0,0,244,242,1,0,0,0,244,245,1,0,0,0,245,27,1,0,0,0,246,244,1,0,
-	0,0,247,252,3,26,13,0,248,249,5,164,0,0,249,251,3,26,13,0,250,248,1,0,0,
-	0,251,254,1,0,0,0,252,250,1,0,0,0,252,253,1,0,0,0,253,29,1,0,0,0,254,252,
-	1,0,0,0,255,260,3,28,14,0,256,257,5,161,0,0,257,259,3,28,14,0,258,256,1,
-	0,0,0,259,262,1,0,0,0,260,258,1,0,0,0,260,261,1,0,0,0,261,31,1,0,0,0,262,
-	260,1,0,0,0,263,268,3,30,15,0,264,265,5,162,0,0,265,267,3,30,15,0,266,264,
-	1,0,0,0,267,270,1,0,0,0,268,266,1,0,0,0,268,269,1,0,0,0,269,33,1,0,0,0,
-	270,268,1,0,0,0,271,276,3,32,16,0,272,273,5,163,0,0,273,275,3,32,16,0,274,
-	272,1,0,0,0,275,278,1,0,0,0,276,274,1,0,0,0,276,277,1,0,0,0,277,35,1,0,
-	0,0,278,276,1,0,0,0,279,285,3,34,17,0,280,281,5,166,0,0,281,282,3,42,21,
-	0,282,283,5,167,0,0,283,284,3,36,18,0,284,286,1,0,0,0,285,280,1,0,0,0,285,
-	286,1,0,0,0,286,37,1,0,0,0,287,294,3,36,18,0,288,289,3,10,5,0,289,290,3,
-	40,20,0,290,291,3,38,19,0,291,294,1,0,0,0,292,294,5,187,0,0,293,287,1,0,
-	0,0,293,288,1,0,0,0,293,292,1,0,0,0,294,39,1,0,0,0,295,296,7,8,0,0,296,
-	41,1,0,0,0,297,302,3,38,19,0,298,299,5,169,0,0,299,301,3,38,19,0,300,298,
-	1,0,0,0,301,304,1,0,0,0,302,300,1,0,0,0,302,303,1,0,0,0,303,43,1,0,0,0,
-	304,302,1,0,0,0,305,306,3,36,18,0,306,45,1,0,0,0,307,308,3,48,24,0,308,
-	309,5,168,0,0,309,47,1,0,0,0,310,312,3,52,26,0,311,310,1,0,0,0,312,313,
-	1,0,0,0,313,311,1,0,0,0,313,314,1,0,0,0,314,49,1,0,0,0,315,317,3,52,26,
-	0,316,315,1,0,0,0,317,318,1,0,0,0,318,316,1,0,0,0,318,319,1,0,0,0,319,51,
-	1,0,0,0,320,323,3,54,27,0,321,323,3,56,28,0,322,320,1,0,0,0,322,321,1,0,
-	0,0,323,53,1,0,0,0,324,325,7,9,0,0,325,55,1,0,0,0,326,327,7,10,0,0,327,
-	57,1,0,0,0,328,330,3,54,27,0,329,331,3,58,29,0,330,329,1,0,0,0,330,331,
-	1,0,0,0,331,59,1,0,0,0,332,333,3,62,31,0,333,61,1,0,0,0,334,335,6,31,-1,
-	0,335,336,5,185,0,0,336,350,1,0,0,0,337,338,10,2,0,0,338,339,5,141,0,0,
-	339,340,3,66,33,0,340,341,5,142,0,0,341,349,1,0,0,0,342,343,10,1,0,0,343,
-	345,5,141,0,0,344,346,3,72,36,0,345,344,1,0,0,0,345,346,1,0,0,0,346,347,
-	1,0,0,0,347,349,5,142,0,0,348,337,1,0,0,0,348,342,1,0,0,0,349,352,1,0,0,
-	0,350,348,1,0,0,0,350,351,1,0,0,0,351,63,1,0,0,0,352,350,1,0,0,0,353,359,
-	8,11,0,0,354,355,5,141,0,0,355,356,3,64,32,0,356,357,5,142,0,0,357,359,
-	1,0,0,0,358,353,1,0,0,0,358,354,1,0,0,0,359,362,1,0,0,0,360,358,1,0,0,0,
-	360,361,1,0,0,0,361,65,1,0,0,0,362,360,1,0,0,0,363,366,3,68,34,0,364,365,
-	5,169,0,0,365,367,5,184,0,0,366,364,1,0,0,0,366,367,1,0,0,0,367,67,1,0,
-	0,0,368,373,3,70,35,0,369,370,5,169,0,0,370,372,3,70,35,0,371,369,1,0,0,
-	0,372,375,1,0,0,0,373,371,1,0,0,0,373,374,1,0,0,0,374,69,1,0,0,0,375,373,
-	1,0,0,0,376,377,3,50,25,0,377,71,1,0,0,0,378,383,5,185,0,0,379,380,5,169,
-	0,0,380,382,5,185,0,0,381,379,1,0,0,0,382,385,1,0,0,0,383,381,1,0,0,0,383,
-	384,1,0,0,0,384,73,1,0,0,0,385,383,1,0,0,0,386,387,3,58,29,0,387,75,1,0,
-	0,0,388,389,6,38,-1,0,389,390,5,143,0,0,390,391,5,157,0,0,391,392,5,144,
-	0,0,392,405,1,0,0,0,393,394,10,2,0,0,394,396,5,143,0,0,395,397,3,38,19,
-	0,396,395,1,0,0,0,396,397,1,0,0,0,397,398,1,0,0,0,398,404,5,144,0,0,399,
-	400,10,1,0,0,400,401,5,143,0,0,401,402,5,157,0,0,402,404,5,144,0,0,403,
-	393,1,0,0,0,403,399,1,0,0,0,404,407,1,0,0,0,405,403,1,0,0,0,405,406,1,0,
-	0,0,406,77,1,0,0,0,407,405,1,0,0,0,408,409,5,185,0,0,409,79,1,0,0,0,410,
-	419,3,38,19,0,411,412,5,145,0,0,412,414,3,82,41,0,413,415,5,169,0,0,414,
-	413,1,0,0,0,414,415,1,0,0,0,415,416,1,0,0,0,416,417,5,146,0,0,417,419,1,
-	0,0,0,418,410,1,0,0,0,418,411,1,0,0,0,419,81,1,0,0,0,420,422,3,84,42,0,
-	421,420,1,0,0,0,421,422,1,0,0,0,422,423,1,0,0,0,423,431,3,80,40,0,424,426,
-	5,169,0,0,425,427,3,84,42,0,426,425,1,0,0,0,426,427,1,0,0,0,427,428,1,0,
-	0,0,428,430,3,80,40,0,429,424,1,0,0,0,430,433,1,0,0,0,431,429,1,0,0,0,431,
-	432,1,0,0,0,432,83,1,0,0,0,433,431,1,0,0,0,434,435,3,86,43,0,435,436,5,
-	170,0,0,436,85,1,0,0,0,437,439,3,88,44,0,438,437,1,0,0,0,439,440,1,0,0,
-	0,440,438,1,0,0,0,440,441,1,0,0,0,441,87,1,0,0,0,442,443,5,143,0,0,443,
-	444,3,44,22,0,444,445,5,144,0,0,445,449,1,0,0,0,446,447,5,183,0,0,447,449,
-	5,185,0,0,448,442,1,0,0,0,448,446,1,0,0,0,449,89,1,0,0,0,450,488,3,92,46,
-	0,451,488,3,94,47,0,452,488,3,100,50,0,453,488,3,102,51,0,454,488,3,104,
-	52,0,455,488,3,112,56,0,456,457,7,12,0,0,457,458,7,13,0,0,458,467,5,141,
-	0,0,459,464,3,34,17,0,460,461,5,169,0,0,461,463,3,34,17,0,462,460,1,0,0,
-	0,463,466,1,0,0,0,464,462,1,0,0,0,464,465,1,0,0,0,465,468,1,0,0,0,466,464,
-	1,0,0,0,467,459,1,0,0,0,467,468,1,0,0,0,468,482,1,0,0,0,469,478,5,167,0,
-	0,470,475,3,34,17,0,471,472,5,169,0,0,472,474,3,34,17,0,473,471,1,0,0,0,
-	474,477,1,0,0,0,475,473,1,0,0,0,475,476,1,0,0,0,476,479,1,0,0,0,477,475,
-	1,0,0,0,478,470,1,0,0,0,478,479,1,0,0,0,479,481,1,0,0,0,480,469,1,0,0,0,
-	481,484,1,0,0,0,482,480,1,0,0,0,482,483,1,0,0,0,483,485,1,0,0,0,484,482,
-	1,0,0,0,485,486,5,142,0,0,486,488,5,168,0,0,487,450,1,0,0,0,487,451,1,0,
-	0,0,487,452,1,0,0,0,487,453,1,0,0,0,487,454,1,0,0,0,487,455,1,0,0,0,487,
-	456,1,0,0,0,488,91,1,0,0,0,489,490,5,185,0,0,490,491,5,167,0,0,491,501,
-	3,90,45,0,492,493,5,126,0,0,493,494,3,44,22,0,494,495,5,167,0,0,495,496,
-	3,90,45,0,496,501,1,0,0,0,497,498,5,129,0,0,498,499,5,167,0,0,499,501,3,
-	90,45,0,500,489,1,0,0,0,500,492,1,0,0,0,500,497,1,0,0,0,501,93,1,0,0,0,
-	502,504,5,145,0,0,503,505,3,96,48,0,504,503,1,0,0,0,504,505,1,0,0,0,505,
-	506,1,0,0,0,506,507,5,146,0,0,507,95,1,0,0,0,508,510,3,98,49,0,509,508,
-	1,0,0,0,510,511,1,0,0,0,511,509,1,0,0,0,511,512,1,0,0,0,512,97,1,0,0,0,
-	513,516,3,90,45,0,514,516,3,46,23,0,515,513,1,0,0,0,515,514,1,0,0,0,516,
-	99,1,0,0,0,517,519,3,42,21,0,518,517,1,0,0,0,518,519,1,0,0,0,519,520,1,
-	0,0,0,520,521,5,168,0,0,521,101,1,0,0,0,522,523,5,135,0,0,523,524,5,141,
-	0,0,524,525,3,42,21,0,525,526,5,142,0,0,526,529,3,90,45,0,527,528,5,131,
-	0,0,528,530,3,90,45,0,529,527,1,0,0,0,529,530,1,0,0,0,530,538,1,0,0,0,531,
-	532,5,138,0,0,532,533,5,141,0,0,533,534,3,42,21,0,534,535,5,142,0,0,535,
-	536,3,90,45,0,536,538,1,0,0,0,537,522,1,0,0,0,537,531,1,0,0,0,538,103,1,
-	0,0,0,539,540,5,140,0,0,540,541,5,141,0,0,541,542,3,42,21,0,542,543,5,142,
-	0,0,543,544,3,90,45,0,544,560,1,0,0,0,545,546,5,130,0,0,546,547,3,90,45,
-	0,547,548,5,140,0,0,548,549,5,141,0,0,549,550,3,42,21,0,550,551,5,142,0,
-	0,551,552,5,168,0,0,552,560,1,0,0,0,553,554,5,133,0,0,554,555,5,141,0,0,
-	555,556,3,106,53,0,556,557,5,142,0,0,557,558,3,90,45,0,558,560,1,0,0,0,
-	559,539,1,0,0,0,559,545,1,0,0,0,559,553,1,0,0,0,560,105,1,0,0,0,561,566,
-	3,108,54,0,562,564,3,42,21,0,563,562,1,0,0,0,563,564,1,0,0,0,564,566,1,
-	0,0,0,565,561,1,0,0,0,565,563,1,0,0,0,566,567,1,0,0,0,567,569,5,168,0,0,
-	568,570,3,110,55,0,569,568,1,0,0,0,569,570,1,0,0,0,570,571,1,0,0,0,571,
-	573,5,168,0,0,572,574,3,110,55,0,573,572,1,0,0,0,573,574,1,0,0,0,574,107,
-	1,0,0,0,575,576,3,48,24,0,576,109,1,0,0,0,577,582,3,38,19,0,578,579,5,169,
-	0,0,579,581,3,38,19,0,580,578,1,0,0,0,581,584,1,0,0,0,582,580,1,0,0,0,582,
-	583,1,0,0,0,583,111,1,0,0,0,584,582,1,0,0,0,585,586,5,134,0,0,586,596,5,
-	185,0,0,587,596,5,128,0,0,588,596,5,125,0,0,589,591,5,137,0,0,590,592,3,
-	42,21,0,591,590,1,0,0,0,591,592,1,0,0,0,592,596,1,0,0,0,593,594,5,134,0,
-	0,594,596,3,10,5,0,595,585,1,0,0,0,595,587,1,0,0,0,595,588,1,0,0,0,595,
-	589,1,0,0,0,595,593,1,0,0,0,596,597,1,0,0,0,597,598,5,168,0,0,598,113,1,
-	0,0,0,599,601,3,116,58,0,600,599,1,0,0,0,600,601,1,0,0,0,601,602,1,0,0,
-	0,602,603,5,0,0,1,603,115,1,0,0,0,604,606,3,118,59,0,605,604,1,0,0,0,606,
-	607,1,0,0,0,607,605,1,0,0,0,607,608,1,0,0,0,608,117,1,0,0,0,609,613,3,120,
-	60,0,610,613,3,46,23,0,611,613,5,168,0,0,612,609,1,0,0,0,612,610,1,0,0,
-	0,612,611,1,0,0,0,613,119,1,0,0,0,614,616,3,48,24,0,615,614,1,0,0,0,615,
-	616,1,0,0,0,616,617,1,0,0,0,617,619,3,60,30,0,618,620,3,122,61,0,619,618,
-	1,0,0,0,619,620,1,0,0,0,620,621,1,0,0,0,621,622,3,94,47,0,622,121,1,0,0,
-	0,623,625,3,46,23,0,624,623,1,0,0,0,625,626,1,0,0,0,626,624,1,0,0,0,626,
-	627,1,0,0,0,627,123,1,0,0,0,73,129,135,142,147,159,166,168,176,182,191,
-	197,204,212,220,228,236,244,252,260,268,276,285,293,302,313,318,322,330,
-	345,348,350,358,360,366,373,383,396,403,405,414,418,421,426,431,440,448,
-	464,467,475,478,482,487,500,504,511,515,518,529,537,559,563,565,569,573,
-	582,591,595,600,607,612,615,619,626];
+	304,9,21,1,22,1,22,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,3,
+	23,318,8,23,1,24,4,24,321,8,24,11,24,12,24,322,1,25,4,25,326,8,25,11,25,
+	12,25,327,1,26,1,26,3,26,332,8,26,1,27,1,27,1,28,1,28,1,29,1,29,3,29,340,
+	8,29,1,30,1,30,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,1,31,3,
+	31,355,8,31,1,31,5,31,358,8,31,10,31,12,31,361,9,31,1,32,1,32,1,32,1,32,
+	1,32,5,32,368,8,32,10,32,12,32,371,9,32,1,33,1,33,1,33,3,33,376,8,33,1,
+	34,1,34,1,34,5,34,381,8,34,10,34,12,34,384,9,34,1,35,1,35,3,35,388,8,35,
+	1,35,1,35,1,35,1,35,3,35,394,8,35,1,36,1,36,1,36,5,36,399,8,36,10,36,12,
+	36,402,9,36,1,37,1,37,1,38,1,38,1,38,1,38,1,38,1,38,1,38,1,38,3,38,414,
+	8,38,1,38,1,38,1,38,1,38,1,38,5,38,421,8,38,10,38,12,38,424,9,38,1,39,1,
+	39,1,40,1,40,1,40,1,40,3,40,432,8,40,1,40,1,40,3,40,436,8,40,1,41,3,41,
+	439,8,41,1,41,1,41,1,41,3,41,444,8,41,1,41,5,41,447,8,41,10,41,12,41,450,
+	9,41,1,42,1,42,1,42,1,43,4,43,456,8,43,11,43,12,43,457,1,44,1,44,1,44,1,
+	44,1,44,1,44,3,44,466,8,44,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,1,45,
+	1,45,1,45,1,45,5,45,480,8,45,10,45,12,45,483,9,45,3,45,485,8,45,1,45,1,
+	45,1,45,1,45,5,45,491,8,45,10,45,12,45,494,9,45,3,45,496,8,45,5,45,498,
+	8,45,10,45,12,45,501,9,45,1,45,1,45,3,45,505,8,45,1,46,1,46,1,46,1,46,1,
+	46,1,46,1,46,1,46,1,46,1,46,1,46,3,46,518,8,46,1,47,1,47,3,47,522,8,47,
+	1,47,1,47,1,48,4,48,527,8,48,11,48,12,48,528,1,49,1,49,3,49,533,8,49,1,
+	50,3,50,536,8,50,1,50,1,50,1,51,1,51,1,51,1,51,1,51,1,51,1,51,3,51,547,
+	8,51,1,51,1,51,1,51,1,51,1,51,1,51,3,51,555,8,51,1,52,1,52,1,52,1,52,1,
+	52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,1,52,
+	1,52,3,52,577,8,52,1,53,1,53,3,53,581,8,53,3,53,583,8,53,1,53,1,53,3,53,
+	587,8,53,1,53,1,53,3,53,591,8,53,1,54,1,54,1,55,1,55,1,55,5,55,598,8,55,
+	10,55,12,55,601,9,55,1,56,1,56,1,56,1,56,1,56,1,56,3,56,609,8,56,1,56,1,
+	56,3,56,613,8,56,1,56,1,56,1,57,3,57,618,8,57,1,57,1,57,1,58,4,58,623,8,
+	58,11,58,12,58,624,1,59,1,59,1,59,3,59,630,8,59,1,60,3,60,633,8,60,1,60,
+	1,60,3,60,637,8,60,1,60,1,60,1,61,4,61,642,8,61,11,61,12,61,643,1,61,0,
+	2,62,76,62,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,
+	44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,
+	92,94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,0,14,2,0,1,
+	1,183,183,2,0,154,154,156,156,6,0,2,2,153,153,155,155,157,157,160,160,165,
+	165,1,0,157,159,2,0,153,153,155,155,1,0,151,152,1,0,147,150,1,0,181,182,
+	1,0,170,180,4,0,127,127,132,132,136,136,139,139,1,0,3,120,1,0,141,142,1,
+	0,121,122,1,0,123,124,677,0,135,1,0,0,0,2,137,1,0,0,0,4,147,1,0,0,0,6,152,
+	1,0,0,0,8,171,1,0,0,0,10,182,1,0,0,0,12,193,1,0,0,0,14,197,1,0,0,0,16,199,
+	1,0,0,0,18,207,1,0,0,0,20,215,1,0,0,0,22,223,1,0,0,0,24,231,1,0,0,0,26,
+	239,1,0,0,0,28,247,1,0,0,0,30,255,1,0,0,0,32,263,1,0,0,0,34,271,1,0,0,0,
+	36,279,1,0,0,0,38,293,1,0,0,0,40,295,1,0,0,0,42,297,1,0,0,0,44,305,1,0,
+	0,0,46,317,1,0,0,0,48,320,1,0,0,0,50,325,1,0,0,0,52,331,1,0,0,0,54,333,
+	1,0,0,0,56,335,1,0,0,0,58,337,1,0,0,0,60,341,1,0,0,0,62,343,1,0,0,0,64,
+	369,1,0,0,0,66,372,1,0,0,0,68,377,1,0,0,0,70,393,1,0,0,0,72,395,1,0,0,0,
+	74,403,1,0,0,0,76,405,1,0,0,0,78,425,1,0,0,0,80,435,1,0,0,0,82,438,1,0,
+	0,0,84,451,1,0,0,0,86,455,1,0,0,0,88,465,1,0,0,0,90,504,1,0,0,0,92,517,
+	1,0,0,0,94,519,1,0,0,0,96,526,1,0,0,0,98,532,1,0,0,0,100,535,1,0,0,0,102,
+	554,1,0,0,0,104,576,1,0,0,0,106,582,1,0,0,0,108,592,1,0,0,0,110,594,1,0,
+	0,0,112,612,1,0,0,0,114,617,1,0,0,0,116,622,1,0,0,0,118,629,1,0,0,0,120,
+	632,1,0,0,0,122,641,1,0,0,0,124,136,5,185,0,0,125,136,5,186,0,0,126,128,
+	5,188,0,0,127,126,1,0,0,0,128,129,1,0,0,0,129,127,1,0,0,0,129,130,1,0,0,
+	0,130,136,1,0,0,0,131,132,5,141,0,0,132,133,3,42,21,0,133,134,5,142,0,0,
+	134,136,1,0,0,0,135,124,1,0,0,0,135,125,1,0,0,0,135,127,1,0,0,0,135,131,
+	1,0,0,0,136,1,1,0,0,0,137,142,3,4,2,0,138,139,5,169,0,0,139,141,3,4,2,0,
+	140,138,1,0,0,0,141,144,1,0,0,0,142,140,1,0,0,0,142,143,1,0,0,0,143,3,1,
+	0,0,0,144,142,1,0,0,0,145,148,3,74,37,0,146,148,5,129,0,0,147,145,1,0,0,
+	0,147,146,1,0,0,0,148,149,1,0,0,0,149,150,5,167,0,0,150,151,3,38,19,0,151,
+	5,1,0,0,0,152,168,3,0,0,0,153,154,5,143,0,0,154,155,3,42,21,0,155,156,5,
+	144,0,0,156,167,1,0,0,0,157,159,5,141,0,0,158,160,3,8,4,0,159,158,1,0,0,
+	0,159,160,1,0,0,0,160,161,1,0,0,0,161,167,5,142,0,0,162,163,7,0,0,0,163,
+	167,5,185,0,0,164,167,5,154,0,0,165,167,5,156,0,0,166,153,1,0,0,0,166,157,
+	1,0,0,0,166,162,1,0,0,0,166,164,1,0,0,0,166,165,1,0,0,0,167,170,1,0,0,0,
+	168,166,1,0,0,0,168,169,1,0,0,0,169,7,1,0,0,0,170,168,1,0,0,0,171,176,3,
+	38,19,0,172,173,5,169,0,0,173,175,3,38,19,0,174,172,1,0,0,0,175,178,1,0,
+	0,0,176,174,1,0,0,0,176,177,1,0,0,0,177,9,1,0,0,0,178,176,1,0,0,0,179,181,
+	7,1,0,0,180,179,1,0,0,0,181,184,1,0,0,0,182,180,1,0,0,0,182,183,1,0,0,0,
+	183,191,1,0,0,0,184,182,1,0,0,0,185,192,3,6,3,0,186,187,3,12,6,0,187,188,
+	3,14,7,0,188,192,1,0,0,0,189,190,5,162,0,0,190,192,5,185,0,0,191,185,1,
+	0,0,0,191,186,1,0,0,0,191,189,1,0,0,0,192,11,1,0,0,0,193,194,7,2,0,0,194,
+	13,1,0,0,0,195,198,3,10,5,0,196,198,5,187,0,0,197,195,1,0,0,0,197,196,1,
+	0,0,0,198,15,1,0,0,0,199,204,3,14,7,0,200,201,7,3,0,0,201,203,3,14,7,0,
+	202,200,1,0,0,0,203,206,1,0,0,0,204,202,1,0,0,0,204,205,1,0,0,0,205,17,
+	1,0,0,0,206,204,1,0,0,0,207,212,3,16,8,0,208,209,7,4,0,0,209,211,3,16,8,
+	0,210,208,1,0,0,0,211,214,1,0,0,0,212,210,1,0,0,0,212,213,1,0,0,0,213,19,
+	1,0,0,0,214,212,1,0,0,0,215,220,3,18,9,0,216,217,7,5,0,0,217,219,3,18,9,
+	0,218,216,1,0,0,0,219,222,1,0,0,0,220,218,1,0,0,0,220,221,1,0,0,0,221,21,
+	1,0,0,0,222,220,1,0,0,0,223,228,3,20,10,0,224,225,7,6,0,0,225,227,3,20,
+	10,0,226,224,1,0,0,0,227,230,1,0,0,0,228,226,1,0,0,0,228,229,1,0,0,0,229,
+	23,1,0,0,0,230,228,1,0,0,0,231,236,3,22,11,0,232,233,7,7,0,0,233,235,3,
+	22,11,0,234,232,1,0,0,0,235,238,1,0,0,0,236,234,1,0,0,0,236,237,1,0,0,0,
+	237,25,1,0,0,0,238,236,1,0,0,0,239,244,3,24,12,0,240,241,5,160,0,0,241,
+	243,3,24,12,0,242,240,1,0,0,0,243,246,1,0,0,0,244,242,1,0,0,0,244,245,1,
+	0,0,0,245,27,1,0,0,0,246,244,1,0,0,0,247,252,3,26,13,0,248,249,5,164,0,
+	0,249,251,3,26,13,0,250,248,1,0,0,0,251,254,1,0,0,0,252,250,1,0,0,0,252,
+	253,1,0,0,0,253,29,1,0,0,0,254,252,1,0,0,0,255,260,3,28,14,0,256,257,5,
+	161,0,0,257,259,3,28,14,0,258,256,1,0,0,0,259,262,1,0,0,0,260,258,1,0,0,
+	0,260,261,1,0,0,0,261,31,1,0,0,0,262,260,1,0,0,0,263,268,3,30,15,0,264,
+	265,5,162,0,0,265,267,3,30,15,0,266,264,1,0,0,0,267,270,1,0,0,0,268,266,
+	1,0,0,0,268,269,1,0,0,0,269,33,1,0,0,0,270,268,1,0,0,0,271,276,3,32,16,
+	0,272,273,5,163,0,0,273,275,3,32,16,0,274,272,1,0,0,0,275,278,1,0,0,0,276,
+	274,1,0,0,0,276,277,1,0,0,0,277,35,1,0,0,0,278,276,1,0,0,0,279,285,3,34,
+	17,0,280,281,5,166,0,0,281,282,3,42,21,0,282,283,5,167,0,0,283,284,3,36,
+	18,0,284,286,1,0,0,0,285,280,1,0,0,0,285,286,1,0,0,0,286,37,1,0,0,0,287,
+	294,3,36,18,0,288,289,3,10,5,0,289,290,3,40,20,0,290,291,3,38,19,0,291,
+	294,1,0,0,0,292,294,5,187,0,0,293,287,1,0,0,0,293,288,1,0,0,0,293,292,1,
+	0,0,0,294,39,1,0,0,0,295,296,7,8,0,0,296,41,1,0,0,0,297,302,3,38,19,0,298,
+	299,5,169,0,0,299,301,3,38,19,0,300,298,1,0,0,0,301,304,1,0,0,0,302,300,
+	1,0,0,0,302,303,1,0,0,0,303,43,1,0,0,0,304,302,1,0,0,0,305,306,3,36,18,
+	0,306,45,1,0,0,0,307,308,3,48,24,0,308,309,5,185,0,0,309,310,5,168,0,0,
+	310,318,1,0,0,0,311,312,3,48,24,0,312,313,5,185,0,0,313,314,5,170,0,0,314,
+	315,3,38,19,0,315,316,5,168,0,0,316,318,1,0,0,0,317,307,1,0,0,0,317,311,
+	1,0,0,0,318,47,1,0,0,0,319,321,3,52,26,0,320,319,1,0,0,0,321,322,1,0,0,
+	0,322,320,1,0,0,0,322,323,1,0,0,0,323,49,1,0,0,0,324,326,3,52,26,0,325,
+	324,1,0,0,0,326,327,1,0,0,0,327,325,1,0,0,0,327,328,1,0,0,0,328,51,1,0,
+	0,0,329,332,3,54,27,0,330,332,3,56,28,0,331,329,1,0,0,0,331,330,1,0,0,0,
+	332,53,1,0,0,0,333,334,7,9,0,0,334,55,1,0,0,0,335,336,7,10,0,0,336,57,1,
+	0,0,0,337,339,3,54,27,0,338,340,3,58,29,0,339,338,1,0,0,0,339,340,1,0,0,
+	0,340,59,1,0,0,0,341,342,3,62,31,0,342,61,1,0,0,0,343,344,6,31,-1,0,344,
+	345,5,185,0,0,345,359,1,0,0,0,346,347,10,2,0,0,347,348,5,141,0,0,348,349,
+	3,66,33,0,349,350,5,142,0,0,350,358,1,0,0,0,351,352,10,1,0,0,352,354,5,
+	141,0,0,353,355,3,72,36,0,354,353,1,0,0,0,354,355,1,0,0,0,355,356,1,0,0,
+	0,356,358,5,142,0,0,357,346,1,0,0,0,357,351,1,0,0,0,358,361,1,0,0,0,359,
+	357,1,0,0,0,359,360,1,0,0,0,360,63,1,0,0,0,361,359,1,0,0,0,362,368,8,11,
+	0,0,363,364,5,141,0,0,364,365,3,64,32,0,365,366,5,142,0,0,366,368,1,0,0,
+	0,367,362,1,0,0,0,367,363,1,0,0,0,368,371,1,0,0,0,369,367,1,0,0,0,369,370,
+	1,0,0,0,370,65,1,0,0,0,371,369,1,0,0,0,372,375,3,68,34,0,373,374,5,169,
+	0,0,374,376,5,184,0,0,375,373,1,0,0,0,375,376,1,0,0,0,376,67,1,0,0,0,377,
+	382,3,70,35,0,378,379,5,169,0,0,379,381,3,70,35,0,380,378,1,0,0,0,381,384,
+	1,0,0,0,382,380,1,0,0,0,382,383,1,0,0,0,383,69,1,0,0,0,384,382,1,0,0,0,
+	385,387,3,50,25,0,386,388,5,185,0,0,387,386,1,0,0,0,387,388,1,0,0,0,388,
+	394,1,0,0,0,389,390,3,50,25,0,390,391,5,160,0,0,391,392,5,185,0,0,392,394,
+	1,0,0,0,393,385,1,0,0,0,393,389,1,0,0,0,394,71,1,0,0,0,395,400,5,185,0,
+	0,396,397,5,169,0,0,397,399,5,185,0,0,398,396,1,0,0,0,399,402,1,0,0,0,400,
+	398,1,0,0,0,400,401,1,0,0,0,401,73,1,0,0,0,402,400,1,0,0,0,403,404,3,58,
+	29,0,404,75,1,0,0,0,405,406,6,38,-1,0,406,407,5,143,0,0,407,408,5,157,0,
+	0,408,409,5,144,0,0,409,422,1,0,0,0,410,411,10,2,0,0,411,413,5,143,0,0,
+	412,414,3,38,19,0,413,412,1,0,0,0,413,414,1,0,0,0,414,415,1,0,0,0,415,421,
+	5,144,0,0,416,417,10,1,0,0,417,418,5,143,0,0,418,419,5,157,0,0,419,421,
+	5,144,0,0,420,410,1,0,0,0,420,416,1,0,0,0,421,424,1,0,0,0,422,420,1,0,0,
+	0,422,423,1,0,0,0,423,77,1,0,0,0,424,422,1,0,0,0,425,426,5,185,0,0,426,
+	79,1,0,0,0,427,436,3,38,19,0,428,429,5,145,0,0,429,431,3,82,41,0,430,432,
+	5,169,0,0,431,430,1,0,0,0,431,432,1,0,0,0,432,433,1,0,0,0,433,434,5,146,
+	0,0,434,436,1,0,0,0,435,427,1,0,0,0,435,428,1,0,0,0,436,81,1,0,0,0,437,
+	439,3,84,42,0,438,437,1,0,0,0,438,439,1,0,0,0,439,440,1,0,0,0,440,448,3,
+	80,40,0,441,443,5,169,0,0,442,444,3,84,42,0,443,442,1,0,0,0,443,444,1,0,
+	0,0,444,445,1,0,0,0,445,447,3,80,40,0,446,441,1,0,0,0,447,450,1,0,0,0,448,
+	446,1,0,0,0,448,449,1,0,0,0,449,83,1,0,0,0,450,448,1,0,0,0,451,452,3,86,
+	43,0,452,453,5,170,0,0,453,85,1,0,0,0,454,456,3,88,44,0,455,454,1,0,0,0,
+	456,457,1,0,0,0,457,455,1,0,0,0,457,458,1,0,0,0,458,87,1,0,0,0,459,460,
+	5,143,0,0,460,461,3,44,22,0,461,462,5,144,0,0,462,466,1,0,0,0,463,464,5,
+	183,0,0,464,466,5,185,0,0,465,459,1,0,0,0,465,463,1,0,0,0,466,89,1,0,0,
+	0,467,505,3,92,46,0,468,505,3,94,47,0,469,505,3,100,50,0,470,505,3,102,
+	51,0,471,505,3,104,52,0,472,505,3,112,56,0,473,474,7,12,0,0,474,475,7,13,
+	0,0,475,484,5,141,0,0,476,481,3,34,17,0,477,478,5,169,0,0,478,480,3,34,
+	17,0,479,477,1,0,0,0,480,483,1,0,0,0,481,479,1,0,0,0,481,482,1,0,0,0,482,
+	485,1,0,0,0,483,481,1,0,0,0,484,476,1,0,0,0,484,485,1,0,0,0,485,499,1,0,
+	0,0,486,495,5,167,0,0,487,492,3,34,17,0,488,489,5,169,0,0,489,491,3,34,
+	17,0,490,488,1,0,0,0,491,494,1,0,0,0,492,490,1,0,0,0,492,493,1,0,0,0,493,
+	496,1,0,0,0,494,492,1,0,0,0,495,487,1,0,0,0,495,496,1,0,0,0,496,498,1,0,
+	0,0,497,486,1,0,0,0,498,501,1,0,0,0,499,497,1,0,0,0,499,500,1,0,0,0,500,
+	502,1,0,0,0,501,499,1,0,0,0,502,503,5,142,0,0,503,505,5,168,0,0,504,467,
+	1,0,0,0,504,468,1,0,0,0,504,469,1,0,0,0,504,470,1,0,0,0,504,471,1,0,0,0,
+	504,472,1,0,0,0,504,473,1,0,0,0,505,91,1,0,0,0,506,507,5,185,0,0,507,508,
+	5,167,0,0,508,518,3,90,45,0,509,510,5,126,0,0,510,511,3,44,22,0,511,512,
+	5,167,0,0,512,513,3,90,45,0,513,518,1,0,0,0,514,515,5,129,0,0,515,516,5,
+	167,0,0,516,518,3,90,45,0,517,506,1,0,0,0,517,509,1,0,0,0,517,514,1,0,0,
+	0,518,93,1,0,0,0,519,521,5,145,0,0,520,522,3,96,48,0,521,520,1,0,0,0,521,
+	522,1,0,0,0,522,523,1,0,0,0,523,524,5,146,0,0,524,95,1,0,0,0,525,527,3,
+	98,49,0,526,525,1,0,0,0,527,528,1,0,0,0,528,526,1,0,0,0,528,529,1,0,0,0,
+	529,97,1,0,0,0,530,533,3,90,45,0,531,533,3,46,23,0,532,530,1,0,0,0,532,
+	531,1,0,0,0,533,99,1,0,0,0,534,536,3,42,21,0,535,534,1,0,0,0,535,536,1,
+	0,0,0,536,537,1,0,0,0,537,538,5,168,0,0,538,101,1,0,0,0,539,540,5,135,0,
+	0,540,541,5,141,0,0,541,542,3,42,21,0,542,543,5,142,0,0,543,546,3,90,45,
+	0,544,545,5,131,0,0,545,547,3,90,45,0,546,544,1,0,0,0,546,547,1,0,0,0,547,
+	555,1,0,0,0,548,549,5,138,0,0,549,550,5,141,0,0,550,551,3,42,21,0,551,552,
+	5,142,0,0,552,553,3,90,45,0,553,555,1,0,0,0,554,539,1,0,0,0,554,548,1,0,
+	0,0,555,103,1,0,0,0,556,557,5,140,0,0,557,558,5,141,0,0,558,559,3,42,21,
+	0,559,560,5,142,0,0,560,561,3,90,45,0,561,577,1,0,0,0,562,563,5,130,0,0,
+	563,564,3,90,45,0,564,565,5,140,0,0,565,566,5,141,0,0,566,567,3,42,21,0,
+	567,568,5,142,0,0,568,569,5,168,0,0,569,577,1,0,0,0,570,571,5,133,0,0,571,
+	572,5,141,0,0,572,573,3,106,53,0,573,574,5,142,0,0,574,575,3,90,45,0,575,
+	577,1,0,0,0,576,556,1,0,0,0,576,562,1,0,0,0,576,570,1,0,0,0,577,105,1,0,
+	0,0,578,583,3,108,54,0,579,581,3,42,21,0,580,579,1,0,0,0,580,581,1,0,0,
+	0,581,583,1,0,0,0,582,578,1,0,0,0,582,580,1,0,0,0,583,584,1,0,0,0,584,586,
+	5,168,0,0,585,587,3,110,55,0,586,585,1,0,0,0,586,587,1,0,0,0,587,588,1,
+	0,0,0,588,590,5,168,0,0,589,591,3,110,55,0,590,589,1,0,0,0,590,591,1,0,
+	0,0,591,107,1,0,0,0,592,593,3,48,24,0,593,109,1,0,0,0,594,599,3,38,19,0,
+	595,596,5,169,0,0,596,598,3,38,19,0,597,595,1,0,0,0,598,601,1,0,0,0,599,
+	597,1,0,0,0,599,600,1,0,0,0,600,111,1,0,0,0,601,599,1,0,0,0,602,603,5,134,
+	0,0,603,613,5,185,0,0,604,613,5,128,0,0,605,613,5,125,0,0,606,608,5,137,
+	0,0,607,609,3,42,21,0,608,607,1,0,0,0,608,609,1,0,0,0,609,613,1,0,0,0,610,
+	611,5,134,0,0,611,613,3,10,5,0,612,602,1,0,0,0,612,604,1,0,0,0,612,605,
+	1,0,0,0,612,606,1,0,0,0,612,610,1,0,0,0,613,614,1,0,0,0,614,615,5,168,0,
+	0,615,113,1,0,0,0,616,618,3,116,58,0,617,616,1,0,0,0,617,618,1,0,0,0,618,
+	619,1,0,0,0,619,620,5,0,0,1,620,115,1,0,0,0,621,623,3,118,59,0,622,621,
+	1,0,0,0,623,624,1,0,0,0,624,622,1,0,0,0,624,625,1,0,0,0,625,117,1,0,0,0,
+	626,630,3,120,60,0,627,630,3,46,23,0,628,630,5,168,0,0,629,626,1,0,0,0,
+	629,627,1,0,0,0,629,628,1,0,0,0,630,119,1,0,0,0,631,633,3,48,24,0,632,631,
+	1,0,0,0,632,633,1,0,0,0,633,634,1,0,0,0,634,636,3,60,30,0,635,637,3,122,
+	61,0,636,635,1,0,0,0,636,637,1,0,0,0,637,638,1,0,0,0,638,639,3,94,47,0,
+	639,121,1,0,0,0,640,642,3,46,23,0,641,640,1,0,0,0,642,643,1,0,0,0,643,641,
+	1,0,0,0,643,644,1,0,0,0,644,123,1,0,0,0,76,129,135,142,147,159,166,168,
+	176,182,191,197,204,212,220,228,236,244,252,260,268,276,285,293,302,317,
+	322,327,331,339,354,357,359,367,369,375,382,387,393,400,413,420,422,431,
+	435,438,443,448,457,465,481,484,492,495,499,504,517,521,528,532,535,546,
+	554,576,580,582,586,590,599,608,612,617,624,629,632,636,643];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -4499,6 +4558,14 @@ export class PrimaryExpressionContext extends ParserRuleContext {
 	 		listener.exitPrimaryExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitPrimaryExpression) {
+			return visitor.visitPrimaryExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4532,6 +4599,14 @@ export class GenericAssocListContext extends ParserRuleContext {
 	 		listener.exitGenericAssocList(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitGenericAssocList) {
+			return visitor.visitGenericAssocList(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4563,6 +4638,14 @@ export class GenericAssociationContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitGenericAssociation) {
 	 		listener.exitGenericAssociation(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitGenericAssociation) {
+			return visitor.visitGenericAssociation(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -4649,6 +4732,14 @@ export class PostfixExpressionContext extends ParserRuleContext {
 	 		listener.exitPostfixExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitPostfixExpression) {
+			return visitor.visitPostfixExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4680,6 +4771,14 @@ export class ArgumentExpressionListContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitArgumentExpressionList) {
 	 		listener.exitArgumentExpressionList(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitArgumentExpressionList) {
+			return visitor.visitArgumentExpressionList(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -4730,6 +4829,14 @@ export class UnaryExpressionContext extends ParserRuleContext {
 	 		listener.exitUnaryExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitUnaryExpression) {
+			return visitor.visitUnaryExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4766,6 +4873,14 @@ export class UnaryOperatorContext extends ParserRuleContext {
 	 		listener.exitUnaryOperator(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitUnaryOperator) {
+			return visitor.visitUnaryOperator(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4791,6 +4906,14 @@ export class CastExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitCastExpression) {
 	 		listener.exitCastExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitCastExpression) {
+			return visitor.visitCastExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -4838,6 +4961,14 @@ export class MultiplicativeExpressionContext extends ParserRuleContext {
 	 		listener.exitMultiplicativeExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitMultiplicativeExpression) {
+			return visitor.visitMultiplicativeExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4877,6 +5008,14 @@ export class AdditiveExpressionContext extends ParserRuleContext {
 	 		listener.exitAdditiveExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitAdditiveExpression) {
+			return visitor.visitAdditiveExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -4914,6 +5053,14 @@ export class ShiftExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitShiftExpression) {
 	 		listener.exitShiftExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitShiftExpression) {
+			return visitor.visitShiftExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -4967,6 +5114,14 @@ export class RelationalExpressionContext extends ParserRuleContext {
 	 		listener.exitRelationalExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitRelationalExpression) {
+			return visitor.visitRelationalExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5006,6 +5161,14 @@ export class EqualityExpressionContext extends ParserRuleContext {
 	 		listener.exitEqualityExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitEqualityExpression) {
+			return visitor.visitEqualityExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5037,6 +5200,14 @@ export class AndExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitAndExpression) {
 	 		listener.exitAndExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitAndExpression) {
+			return visitor.visitAndExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5072,6 +5243,14 @@ export class ExclusiveOrExpressionContext extends ParserRuleContext {
 	 		listener.exitExclusiveOrExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitExclusiveOrExpression) {
+			return visitor.visitExclusiveOrExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5103,6 +5282,14 @@ export class InclusiveOrExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitInclusiveOrExpression) {
 	 		listener.exitInclusiveOrExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitInclusiveOrExpression) {
+			return visitor.visitInclusiveOrExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5138,6 +5325,14 @@ export class LogicalAndExpressionContext extends ParserRuleContext {
 	 		listener.exitLogicalAndExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitLogicalAndExpression) {
+			return visitor.visitLogicalAndExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5169,6 +5364,14 @@ export class LogicalOrExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitLogicalOrExpression) {
 	 		listener.exitLogicalOrExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitLogicalOrExpression) {
+			return visitor.visitLogicalOrExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5207,6 +5410,14 @@ export class ConditionalExpressionContext extends ParserRuleContext {
 	 		listener.exitConditionalExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitConditionalExpression) {
+			return visitor.visitConditionalExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5241,6 +5452,14 @@ export class AssignmentExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitAssignmentExpression) {
 	 		listener.exitAssignmentExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitAssignmentExpression) {
+			return visitor.visitAssignmentExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5297,6 +5516,14 @@ export class AssignmentOperatorContext extends ParserRuleContext {
 	 		listener.exitAssignmentOperator(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitAssignmentOperator) {
+			return visitor.visitAssignmentOperator(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5330,6 +5557,14 @@ export class ExpressionContext extends ParserRuleContext {
 	 		listener.exitExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitExpression) {
+			return visitor.visitExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5354,6 +5589,14 @@ export class ConstantExpressionContext extends ParserRuleContext {
 	 		listener.exitConstantExpression(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitConstantExpression) {
+			return visitor.visitConstantExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5365,8 +5608,17 @@ export class DeclarationContext extends ParserRuleContext {
 	public declarationSpecifiers(): DeclarationSpecifiersContext {
 		return this.getTypedRuleContext(DeclarationSpecifiersContext, 0) as DeclarationSpecifiersContext;
 	}
+	public Identifier(): TerminalNode {
+		return this.getToken(proglang12dParser.Identifier, 0);
+	}
 	public Semi(): TerminalNode {
 		return this.getToken(proglang12dParser.Semi, 0);
+	}
+	public Assign(): TerminalNode {
+		return this.getToken(proglang12dParser.Assign, 0);
+	}
+	public assignmentExpression(): AssignmentExpressionContext {
+		return this.getTypedRuleContext(AssignmentExpressionContext, 0) as AssignmentExpressionContext;
 	}
     public get ruleIndex(): number {
     	return proglang12dParser.RULE_declaration;
@@ -5379,6 +5631,14 @@ export class DeclarationContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitDeclaration) {
 	 		listener.exitDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDeclaration) {
+			return visitor.visitDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5408,6 +5668,14 @@ export class DeclarationSpecifiersContext extends ParserRuleContext {
 	 		listener.exitDeclarationSpecifiers(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDeclarationSpecifiers) {
+			return visitor.visitDeclarationSpecifiers(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5435,6 +5703,14 @@ export class DeclarationSpecifiers2Context extends ParserRuleContext {
 	 		listener.exitDeclarationSpecifiers2(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDeclarationSpecifiers2) {
+			return visitor.visitDeclarationSpecifiers2(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5460,6 +5736,14 @@ export class DeclarationSpecifierContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitDeclarationSpecifier) {
 	 		listener.exitDeclarationSpecifier(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDeclarationSpecifier) {
+			return visitor.visitDeclarationSpecifier(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5495,6 +5779,14 @@ export class TypeSpecifierContext extends ParserRuleContext {
 	 		listener.exitTypeSpecifier(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitTypeSpecifier) {
+			return visitor.visitTypeSpecifier(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5514,6 +5806,14 @@ export class BuiltInTypeSpecifierContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitBuiltInTypeSpecifier) {
 	 		listener.exitBuiltInTypeSpecifier(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitBuiltInTypeSpecifier) {
+			return visitor.visitBuiltInTypeSpecifier(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5543,6 +5843,14 @@ export class SpecifierQualifierListContext extends ParserRuleContext {
 	 		listener.exitSpecifierQualifierList(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitSpecifierQualifierList) {
+			return visitor.visitSpecifierQualifierList(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5565,6 +5873,14 @@ export class DeclaratorContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitDeclarator) {
 	 		listener.exitDeclarator(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDeclarator) {
+			return visitor.visitDeclarator(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5606,6 +5922,14 @@ export class DirectDeclaratorContext extends ParserRuleContext {
 	 		listener.exitDirectDeclarator(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDirectDeclarator) {
+			return visitor.visitDirectDeclarator(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5645,6 +5969,14 @@ export class NestedParenthesesBlockContext extends ParserRuleContext {
 	 		listener.exitNestedParenthesesBlock(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitNestedParenthesesBlock) {
+			return visitor.visitNestedParenthesesBlock(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5673,6 +6005,14 @@ export class ParameterTypeListContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitParameterTypeList) {
 	 		listener.exitParameterTypeList(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitParameterTypeList) {
+			return visitor.visitParameterTypeList(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5708,6 +6048,14 @@ export class ParameterListContext extends ParserRuleContext {
 	 		listener.exitParameterList(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitParameterList) {
+			return visitor.visitParameterList(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5718,6 +6066,12 @@ export class ParameterDeclarationContext extends ParserRuleContext {
 	}
 	public declarationSpecifiers2(): DeclarationSpecifiers2Context {
 		return this.getTypedRuleContext(DeclarationSpecifiers2Context, 0) as DeclarationSpecifiers2Context;
+	}
+	public Identifier(): TerminalNode {
+		return this.getToken(proglang12dParser.Identifier, 0);
+	}
+	public And(): TerminalNode {
+		return this.getToken(proglang12dParser.And, 0);
 	}
     public get ruleIndex(): number {
     	return proglang12dParser.RULE_parameterDeclaration;
@@ -5730,6 +6084,14 @@ export class ParameterDeclarationContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitParameterDeclaration) {
 	 		listener.exitParameterDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitParameterDeclaration) {
+			return visitor.visitParameterDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5765,6 +6127,14 @@ export class IdentifierListContext extends ParserRuleContext {
 	 		listener.exitIdentifierList(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitIdentifierList) {
+			return visitor.visitIdentifierList(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5787,6 +6157,14 @@ export class TypeNameContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitTypeName) {
 	 		listener.exitTypeName(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitTypeName) {
+			return visitor.visitTypeName(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5825,6 +6203,14 @@ export class DirectAbstractDeclaratorContext extends ParserRuleContext {
 	 		listener.exitDirectAbstractDeclarator(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDirectAbstractDeclarator) {
+			return visitor.visitDirectAbstractDeclarator(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5847,6 +6233,14 @@ export class TypedefNameContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitTypedefName) {
 	 		listener.exitTypedefName(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitTypedefName) {
+			return visitor.visitTypedefName(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5883,6 +6277,14 @@ export class InitializerContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitInitializer) {
 	 		listener.exitInitializer(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitInitializer) {
+			return visitor.visitInitializer(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -5924,6 +6326,14 @@ export class InitializerListContext extends ParserRuleContext {
 	 		listener.exitInitializerList(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitInitializerList) {
+			return visitor.visitInitializerList(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5951,6 +6361,14 @@ export class DesignationContext extends ParserRuleContext {
 	 		listener.exitDesignation(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDesignation) {
+			return visitor.visitDesignation(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -5976,6 +6394,14 @@ export class DesignatorListContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitDesignatorList) {
 	 		listener.exitDesignatorList(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDesignatorList) {
+			return visitor.visitDesignatorList(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6012,6 +6438,14 @@ export class DesignatorContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitDesignator) {
 	 		listener.exitDesignator(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDesignator) {
+			return visitor.visitDesignator(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6080,6 +6514,14 @@ export class StatementContext extends ParserRuleContext {
 	 		listener.exitStatement(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitStatement) {
+			return visitor.visitStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6119,6 +6561,14 @@ export class LabeledStatementContext extends ParserRuleContext {
 	 		listener.exitLabeledStatement(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitLabeledStatement) {
+			return visitor.visitLabeledStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6149,6 +6599,14 @@ export class CompoundStatementContext extends ParserRuleContext {
 	 		listener.exitCompoundStatement(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitCompoundStatement) {
+			return visitor.visitCompoundStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6174,6 +6632,14 @@ export class BlockItemListContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitBlockItemList) {
 	 		listener.exitBlockItemList(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitBlockItemList) {
+			return visitor.visitBlockItemList(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6203,6 +6669,14 @@ export class BlockItemContext extends ParserRuleContext {
 	 		listener.exitBlockItem(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitBlockItem) {
+			return visitor.visitBlockItem(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6228,6 +6702,14 @@ export class ExpressionStatementContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitExpressionStatement) {
 	 		listener.exitExpressionStatement(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitExpressionStatement) {
+			return visitor.visitExpressionStatement(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6273,6 +6755,14 @@ export class SelectionStatementContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitSelectionStatement) {
 	 		listener.exitSelectionStatement(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitSelectionStatement) {
+			return visitor.visitSelectionStatement(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6323,6 +6813,14 @@ export class IterationStatementContext extends ParserRuleContext {
 	 		listener.exitIterationStatement(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitIterationStatement) {
+			return visitor.visitIterationStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6362,6 +6860,14 @@ export class ForConditionContext extends ParserRuleContext {
 	 		listener.exitForCondition(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitForCondition) {
+			return visitor.visitForCondition(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6384,6 +6890,14 @@ export class ForDeclarationContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitForDeclaration) {
 	 		listener.exitForDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitForDeclaration) {
+			return visitor.visitForDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6417,6 +6931,14 @@ export class ForExpressionContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitForExpression) {
 	 		listener.exitForExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitForExpression) {
+			return visitor.visitForExpression(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6464,6 +6986,14 @@ export class JumpStatementContext extends ParserRuleContext {
 	 		listener.exitJumpStatement(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitJumpStatement) {
+			return visitor.visitJumpStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6491,6 +7021,14 @@ export class CompilationUnitContext extends ParserRuleContext {
 	 		listener.exitCompilationUnit(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitCompilationUnit) {
+			return visitor.visitCompilationUnit(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6516,6 +7054,14 @@ export class TranslationUnitContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitTranslationUnit) {
 	 		listener.exitTranslationUnit(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitTranslationUnit) {
+			return visitor.visitTranslationUnit(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6546,6 +7092,14 @@ export class ExternalDeclarationContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitExternalDeclaration) {
 	 		listener.exitExternalDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitExternalDeclaration) {
+			return visitor.visitExternalDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -6581,6 +7135,14 @@ export class FunctionDefinitionContext extends ParserRuleContext {
 	 		listener.exitFunctionDefinition(this);
 		}
 	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitFunctionDefinition) {
+			return visitor.visitFunctionDefinition(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
 }
 
 
@@ -6606,6 +7168,14 @@ export class DeclarationListContext extends ParserRuleContext {
 	public exitRule(listener: proglang12dListener): void {
 	    if(listener.exitDeclarationList) {
 	 		listener.exitDeclarationList(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: proglang12dVisitor<Result>): Result {
+		if (visitor.visitDeclarationList) {
+			return visitor.visitDeclarationList(this);
+		} else {
+			return visitor.visitChildren(this);
 		}
 	}
 }

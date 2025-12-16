@@ -141,7 +141,8 @@ constantExpression
     ;
 
 declaration
-    :   declarationSpecifiers ';'
+    :   declarationSpecifiers Identifier ';'
+    |   declarationSpecifiers Identifier '=' assignmentExpression ';'
     ;
 
 declarationSpecifiers
@@ -315,7 +316,8 @@ parameterList
     ;
 
 parameterDeclaration
-    :   declarationSpecifiers2
+    :   declarationSpecifiers2 Identifier?
+    |   declarationSpecifiers2 '&' Identifier
     ;
 
 identifierList

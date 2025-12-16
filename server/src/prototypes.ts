@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { CompletionItem, CompletionItemKind } from 'vscode-languageserver/node';
+import { CompletionItem, CompletionItemKind, MarkupKind, InsertTextFormat } from 'vscode-languageserver/node';
 
 interface FunctionData {
 	name: string;
@@ -35,7 +35,8 @@ class PrototypesLoader {
 						label: func.name,
 						kind: CompletionItemKind.Function,
 						detail: this.generateSignature(func),
-						documentation: this.generateDocumentation(func),
+						insertText: this.generateSnippet(func),
+						insertTextFormat: InsertTextFormat.Snippet,
 						data: func.name
 					});
 				});
@@ -52,12 +53,20 @@ class PrototypesLoader {
 		}
 	}
 
+	private generateSnippet(func: FunctionData): string {
+		if (func.parameters.length === 0) {
+			return `${func.name}()`;
+		}
+		const params = func.parameters.map((p, index) => `\${${index + 1}:${p.name}}`).join(', ');
+		return `${func.name}(${params})`;
+	}
+
 	private generateSignature(func: FunctionData): string {
 		const params = func.parameters.map(p => `${p.type} ${p.name}`).join(', ');
 		return `${func.returnType} ${func.name}(${params})`;
 	}
 
-	private generateDocumentation(func: FunctionData): string {
+	public generateDocumentation(func: FunctionData): string {
 		const params = func.parameters.map(p => `${p.type} ${p.name}`).join(', ');
 		const signature = `${func.returnType} ${func.name}(${params})`;
 		

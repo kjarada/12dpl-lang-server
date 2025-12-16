@@ -306,11 +306,9 @@ connection.onCompletionResolve(
 		// Try to get documentation from prototypes
 		const prototype = prototypesLoader.getPrototype(item.label);
 		if (prototype) {
-			// Format with colorful markdown
-			const signature = prototypesLoader.getPrototypeSignature(item.label);
 			item.documentation = {
 				kind: 'markdown',
-				value: `\`\`\`12dpl\n${signature}\n\`\`\`\n\n${prototype.description || 'No description available'}`
+				value: prototypesLoader.generateDocumentation(prototype)
 			};
 			return item;
 		}
