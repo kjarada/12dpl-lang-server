@@ -26,9 +26,38 @@
 	},
 	"main": "./client/out/extension",
 	"activationEvents": [
-		"onLanguage:12dpl"
+		"onLanguage:12dpl",
+		"onCommand:12dpl.compile"
 	],
 	"contributes": {
+		"commands": [
+			{
+				"command": "12dpl.compile",
+				"title": "12dPL: Compile Current File",
+				"icon": "$(play)"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "12dpl.compile",
+					"when": "resourceExtname == .4dm"
+				}
+			],
+			"editor/context": [
+				{
+					"command": "12dpl.compile",
+					"when": "resourceExtname == .4dm"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "12dpl.compile",
+					"when": "resourceExtname == .4dm",
+					"group": "navigation"
+				}
+			]
+		},
 		"languages": [
 			{
 				"id": "12dpl",
@@ -95,6 +124,7 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "bun run compile && bun server/copy-resources.js",
+		"build": "bun run compile",
 		"compile": "bun x tsc -b && bun server/copy-resources.js",
 		"watch": "bun x tsc -b -w",
 		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",

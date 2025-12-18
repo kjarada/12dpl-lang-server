@@ -90,6 +90,7 @@ Real xval[],Real yval[],Real lengths[])
     lengths[2] = ch2 - ch1;
   } else {
     lengths[2] = 0.0;
+    
   }
   lengths[1] = radius;
   lengths[3] = left_spiral;
@@ -111,6 +112,13 @@ ypos = 0.5 * (y1 + y2);
 Element elt = Create_text(text,xpos,ypos,size,colour,angle,4,1);
 return (elt);      
 } 
+{
+	Text	program_name	= "12dF Check Exporter";
+	Text    ver     		= "15.1";
+	Text    td_ver 		= "v15";
+	Integer Shutdown_code = 424242;
+}
+
 void main()
 // -------------------------------------------------------------
 //  Select an alignment string and then label it in plan with

@@ -73,7 +73,7 @@ jobs:
             - Ben Olsen (Original)
             - Kamal Jarada (2026 Enhancements)
             
-            See [RELEASE.md](https://github.com/kjarada/12dpl-lang-server/blob/main/RELEASE.md) for full details.
+            See [README.md](https://github.com/kjarada/12dpl-lang-server/blob/main/README.md) for full details.
           files: |
             *.vsix
           draft: false
