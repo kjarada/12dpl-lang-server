@@ -25,10 +25,30 @@ class DiagnosticErrorListener extends ErrorListener<any> {
 export class Validator {
 
 	private static stripConditionalDirectives(documentText: string): string {
-		// The lexer skips #define/#include/#pragma/#line, but 12dPL files often use
-		// C-preprocessor conditionals (#if/#ifdef/#ifndef/#else/#elif/#endif).
-		// Those are not tokenized by the grammar and can produce lexer errors.
-		return documentText.replace(/^\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b.*$/gim, '');
+		// The lexer has rules to skip some preprocessor directives, but real-world
+		// headers include macros containing '#'/'##' which can defeat simplistic lexer
+		// skipping and leak tokens into the parser.
+		//
+		// For validation, we treat ALL preprocessor directive lines as non-code,
+		// including multi-line continuations with a trailing '\\'. We preserve
+		// line numbers by replacing stripped lines with empty lines.
+		const lines = documentText.split(/\r?\n/);
+		const out: string[] = [];
+		let inDirectiveContinuation = false;
+		for (const line of lines) {
+			if (!inDirectiveContinuation && /^\s*#/.test(line)) {
+				out.push('');
+				inDirectiveContinuation = /\\\s*$/.test(line);
+				continue;
+			}
+			if (inDirectiveContinuation) {
+				out.push('');
+				inDirectiveContinuation = /\\\s*$/.test(line);
+				continue;
+			}
+			out.push(line);
+		}
+		return out.join('\n');
 	}
 
 	private static wrapTopLevelScriptsPreservingLines(documentText: string): string {
@@ -83,6 +103,9 @@ export class Validator {
 			const ch = text[j] || '';
 			const next = text[j + 1] || '';
 			if (!ch) return false;
+			// Preprocessor-like directives (e.g. #define/#include) are handled by the lexer
+			// and should not trigger implicit script wrapping.
+			if (ch === '#') return false;
 			if (ch === '/' && (next === '/' || next === '*')) return false;
 			if (ch === '\r' || ch === '\n') return false;
 			return true;
