@@ -106,6 +106,21 @@ Trigger character '.' shows related functions
 - View all errors in the Problems panel
 - Navigate with F8 (next problem)
 
+### Auto-Format on Save (C/C++-Style)
+
+This extension provides a basic C/C++-style formatter (brace-based indentation) for `.4dm` files.
+
+Enable VS Code format-on-save:
+
+```json
+{
+	"editor.formatOnSave": true,
+	"[12dpl]": {
+		"editor.defaultFormatter": "nightworks.12dpl-lang-server"
+	}
+}
+```
+
 ### Compile a `.4dm` File (Play Button)
 
 This extension bundles the 12dPL compiler and can compile the current file into a `.4do` in the same folder.

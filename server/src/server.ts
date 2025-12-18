@@ -14,7 +14,8 @@ import {
 	CompletionItemKind,
 	TextDocumentPositionParams,
 	TextDocumentSyncKind,
-	InitializeResult
+	InitializeResult,
+	TextEdit
 } from 'vscode-languageserver/node';
 
 import {
@@ -32,6 +33,10 @@ import {
 import {
 	typeDocumentation
 } from './documentation.js';
+
+import {
+	format12dplDocument
+} from './formatter.js';
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -70,7 +75,8 @@ connection.onInitialize((params: InitializeParams) => {
 				triggerCharacters: ['.', '#']
 			},
 			// Tell the client that this server supports hover.
-			hoverProvider: true
+			hoverProvider: true,
+			documentFormattingProvider: true
 		}
 	};
 	if (hasWorkspaceFolderCapability) {
@@ -152,6 +158,21 @@ documents.onDidClose(e => {
 // when the text document first opened or when its content has changed.
 documents.onDidChangeContent(change => {
 	validateTextDocument(change.document);
+});
+
+connection.onDocumentFormatting((params) => {
+	const document = documents.get(params.textDocument.uri);
+	if (!document) {
+		return [];
+	}
+
+	const formatted = format12dplDocument(document.getText(), params.options);
+	const fullRange = {
+		start: document.positionAt(0),
+		end: document.positionAt(document.getText().length)
+	};
+
+	return [TextEdit.replace(fullRange, formatted)];
 });
 
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {

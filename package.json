@@ -30,6 +30,11 @@
 		"onCommand:12dpl.compile"
 	],
 	"contributes": {
+		"configurationDefaults": {
+			"[12dpl]": {
+				"editor.defaultFormatter": "nightworks.12dpl-lang-server"
+			}
+		},
 		"commands": [
 			{
 				"command": "12dpl.compile",
@@ -84,6 +89,18 @@
 			"type": "object",
 			"title": "12dPL",
 			"properties": {
+				"12dpl.formatOnSave": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "Auto-format 12dPL files when they are saved."
+				},
+				"12dpl.indentSize": {
+					"scope": "resource",
+					"type": "number",
+					"default": 4,
+					"description": "Indent size (spaces) used by the 12dPL formatter."
+				},
 				"langServer.maxNumberOfProblems": {
 					"scope": "resource",
 					"type": "number",
