@@ -27,7 +27,8 @@
 	"main": "./client/out/extension",
 	"activationEvents": [
 		"onLanguage:12dpl",
-		"onCommand:12dpl.compile"
+		"onCommand:12dpl.compile",
+		"onCommand:12dpl.compileWithFlags"
 	],
 	"contributes": {
 		"configurationDefaults": {
@@ -40,6 +41,11 @@
 				"command": "12dpl.compile",
 				"title": "12dPL: Compile Current File",
 				"icon": "$(play)"
+			},
+			{
+				"command": "12dpl.compileWithFlags",
+				"title": "12dPL: Compile Current File (Select Flags)",
+				"icon": "$(gear)"
 			}
 		],
 		"menus": {
@@ -47,17 +53,30 @@
 				{
 					"command": "12dpl.compile",
 					"when": "resourceExtname == .4dm"
+				},
+				{
+					"command": "12dpl.compileWithFlags",
+					"when": "resourceExtname == .4dm"
 				}
 			],
 			"editor/context": [
 				{
 					"command": "12dpl.compile",
 					"when": "resourceExtname == .4dm"
+				},
+				{
+					"command": "12dpl.compileWithFlags",
+					"when": "resourceExtname == .4dm"
 				}
 			],
 			"editor/title": [
 				{
 					"command": "12dpl.compile",
+					"when": "resourceExtname == .4dm",
+					"group": "navigation"
+				},
+				{
+					"command": "12dpl.compileWithFlags",
 					"when": "resourceExtname == .4dm",
 					"group": "navigation"
 				}
@@ -89,6 +108,32 @@
 			"type": "object",
 			"title": "12dPL",
 			"properties": {
+				"12dpl.compiler.availableFlags": {
+					"scope": "resource",
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [
+						"-p",
+						"-proto",
+						"-nocpp",
+						"-nolines",
+						"-allow_id_calls",
+						"-allow_old_calls",
+						"-keep_cpp"
+					],
+					"description": "List of cc4d compiler flags to show as checkboxes when compiling. Each entry may include arguments, e.g. '-log \"build.log\"' or '-codepage 1252'."
+				},
+				"12dpl.compiler.defaultFlags": {
+					"scope": "resource",
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [],
+					"description": "Default cc4d flags to preselect in the compile checkbox picker. Last selection is remembered per-workspace."
+				},
 				"12dpl.formatOnSave": {
 					"scope": "resource",
 					"type": "boolean",

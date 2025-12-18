@@ -126,8 +126,29 @@ Enable VS Code format-on-save:
 This extension bundles the 12dPL compiler and can compile the current file into a `.4do` in the same folder.
 
 1. Open a `.4dm` file
-2. Click the **Play** button (`▶ 12dPL`) in the VS Code status bar **or** run **“12dPL: Compile Current File”** from the Command Palette
+2. Click the **Play** button (`▶ 12dPL`) in the VS Code status bar to compile immediately **or** run **“12dPL: Compile Current File”** from the Command Palette
 3. Check the Output panel: **12dPL Compiler**
+
+The Output also prints the detected `cc4d` compiler version, and the Play button tooltip shows it when available.
+
+#### Compiler Flags (Checkboxes)
+
+To compile with selectable flags, use the **Gear** button (`⚙ 12dPL`) in the status bar or run **“12dPL: Compile Current File (Select Flags)”**.
+
+This shows a checkbox list of `cc4d` flags to include.
+
+Configure the list in VS Code settings:
+
+```json
+{
+	"12dpl.compiler.availableFlags": ["-p", "-proto", "-nocpp", "-nolines", "-allow_id_calls", "-allow_old_calls", "-keep_cpp"],
+	"12dpl.compiler.defaultFlags": ["-proto"]
+}
+```
+
+Notes:
+- The last selection is remembered per workspace.
+- Entries may include arguments, e.g. `"-log \"compile.log\""` or `"-codepage 1252"`.
 
 Example output:
 - Input: `client/testFixture/Test.4dm`
