@@ -192,7 +192,11 @@
 		"watch": "bun x tsc -b -w",
 		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
 		"postinstall": "cd client && bun install && cd ../server && bun install && cd ..",
-		"test": "sh ./scripts/e2e.sh"
+		"test": "bun test tests",
+		"test:unit": "bun test tests",
+		"test:compile": "bun run compile",
+		"test:all": "bun run compile && bun test tests",
+		"test:e2e": "sh ./scripts/e2e.sh"
 	},
 	"devDependencies": {
 		"@types/mocha": "^9.1.0",

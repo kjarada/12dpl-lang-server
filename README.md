@@ -70,6 +70,24 @@ bun run compile
 bun run watch
 ```
 
+### 1b. Run Tests
+
+Fast, local sanity checks (recommended while developing):
+
+```bash
+bun test
+```
+
+Full confidence checks (typecheck/build + unit tests):
+
+```bash
+bun run test:all
+```
+
+Notes:
+- `bun test` runs the Bun-native test suite in `tests/` (server-level unit/integration tests using the `.4dm` fixtures).
+- The legacy end-to-end script is available as `bun run test:e2e` (requires `sh`, so it may not work on Windows without a POSIX shell).
+
 ### 2. Test in VS Code
 
 1. Press **F5** to launch the extension in a test window

@@ -1,6 +1,27 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 import { CompletionItem, CompletionItemKind, MarkupKind, InsertTextFormat } from 'vscode-languageserver/node';
+
+function getModuleDir(): string {
+	// In CommonJS, __dirname is available.
+	if (typeof __dirname === 'string') {
+		return __dirname;
+	}
+
+	// In ESM (e.g. Bun test running TS as ESM), compute from import.meta.url.
+	// Use an indirect lookup so this file still parses in CommonJS.
+	try {
+		const importMetaUrl = new Function('return import.meta.url')() as string;
+		if (typeof importMetaUrl === 'string' && importMetaUrl.length > 0) {
+			return path.dirname(fileURLToPath(importMetaUrl));
+		}
+	} catch {
+		// ignore
+	}
+
+	return process.cwd();
+}
 
 interface FunctionData {
 	name: string;
@@ -22,7 +43,7 @@ class PrototypesLoader {
 
 		try {
 			// Try to load from JSON first (better quality data)
-			const jsonPath = path.join(__dirname, 'resources', '12dpl_complete_functions.json');
+			const jsonPath = path.join(getModuleDir(), 'resources', '12dpl_complete_functions.json');
 			if (fs.existsSync(jsonPath)) {
 				const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
 				const functions: FunctionData[] = JSON.parse(jsonContent);
