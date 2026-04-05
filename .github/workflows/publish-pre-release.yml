@@ -45,7 +45,7 @@ jobs:
         run: bun run compile
 
       - name: Run tests
-        run: bun test tests
+        run: bun run test
       
       - name: Create VSIX package
         run: |
