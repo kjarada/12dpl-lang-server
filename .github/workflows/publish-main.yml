@@ -43,6 +43,9 @@ jobs:
       
       - name: Compile TypeScript
         run: bun run compile
+
+      - name: Run tests
+        run: bun run test
       
       - name: Create VSIX package
         run: |
