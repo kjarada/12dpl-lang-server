@@ -290,6 +290,21 @@ General cleanup of all code, complete restructure and small bug fixes.
 
 ---
 
+## [v1.4.0] - (April 2026)
+
+### New Features
+- Added `scripts/clean.js` and `bun run clean` command to remove `client/out` and `server/out` before a fresh compile
+
+### Build & CI
+- Added `run-tests.yml` CI workflow — runs on every push/PR to `main`: installs deps, compiles TypeScript, and executes `bun run test`
+- Updated `publish-main.yml` and `publish-pre-release.yml` release workflows to gate VSIX packaging behind a passing test run (compile → test → package)
+- Version bumped from 1.2.0 to 1.4.0
+
+### Overview
+Clean build infrastructure and re-release at version 1.4.0. CI now automatically validates the test suite on every push, and release workflows require tests to pass before creating a VSIX package.
+
+---
+
 # Template
 
 ## [vX.X.X] - (Date)
