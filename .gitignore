@@ -22,6 +22,8 @@ types/
 *.mjs
 *.js.map
 *.d.ts
+# Allow build/tool scripts to be tracked
+!scripts/*.js
 
 ### VS Code extension / testing
 *.vsix
