@@ -21,12 +21,19 @@ Widget Cast(Widget &widget)
 {
 return widget;
 };
+
 void My_function(Text_Text_Map map)
 {
+    Vector4_Guid_Multimap guid_map;
 };
 // -----------------------------------------------------------
 //
-
+Integer create_rgb(Integer r,Integer g,Integer b)
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+{
+  return((1 << 31) | (r << 16) | (g << 8) | b);
+}
 //                  4  SC
 //                  5  CS
 //                  6  HIP
@@ -163,8 +170,9 @@ void main()
     Integer colour;
     Text    colour_name,model_name;
     Model   model;
-    Real
-    x_prev_tangent,y_prev_tangent;
+    Real x_prev_tangent,y_prev_tangent;
+
+
     // Get model for text
     model :
     Model_prompt("Model name for text ? ",model_name);

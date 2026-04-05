@@ -6,13 +6,12 @@
 /**
  * 12dPL language server entrypoint.
  *
- * Keeps LSP wiring here and delegates feature logic (completion/hover/formatting) to providers
- * in `server/src/providers`.
+ * Constructs the service layer and wires LSP lifecycle events.
+ * Feature logic lives in providers/ and services/.
  */
 import {
 	createConnection,
 	TextDocuments,
-	Diagnostic,
 	ProposedFeatures,
 	InitializeParams,
 	DidChangeConfigurationNotification,
@@ -24,64 +23,97 @@ import {
 	TextDocument
 } from 'vscode-languageserver-textdocument';
 
-import {
-	Validator,
-	type IncludeFileVariable
-} from './antlr/validator';
-
-import {
-	prototypesLoader
-} from './util/prototypes';
-
-import { DocumentSymbolStore } from './providers/documentSymbols';
+import { fileUriToFsPath, resolvePathVariables } from './services/includeUtils';
+import { DocumentService } from './services/documentService';
+import { PrototypeService } from './services/prototypeService';
+import { IncludeService } from './services/includeService';
+import { DiagnosticService } from './services/diagnosticService';
+import { SymbolResolver } from './services/symbolResolver';
 import { registerCompletionProvider } from './providers/completionProvider';
 import { registerDefinitionProvider } from './providers/definitionProvider';
 import { registerHoverProvider } from './providers/hoverProvider';
 import { registerFormattingProvider } from './providers/formattingProvider';
-import { registerIncludesProvider } from './providers/includesProvider';
+import { registerValidationProvider } from './providers/validationProvider';
+import { registerDocumentSymbolProvider } from './providers/documentSymbolProvider';
 
 // Create a connection for the server, using Node's IPC as a transport.
-// Also include all preview / proposed LSP features.
 const connection = createConnection(ProposedFeatures.all);
 
 // Create a simple text document manager.
 const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
-const documentSymbols = new DocumentSymbolStore(documents);
+// ─── Construct services in dependency order ─────────────────────────────────
 
-// Set defaults for capabilities as a starting point
+const documentService = new DocumentService(documents);
+const prototypeService = new PrototypeService();
+
+// Include dirs resolver: fetches workspace configuration for each document.
+async function getIncludeDirs(uri: string): Promise<string[]> {
+	let includeDirs: string[] = [];
+	try {
+		const cfg: any = await connection.workspace.getConfiguration({ scopeUri: uri, section: '12dpl' });
+		includeDirs = (cfg?.compiler?.includePaths ?? []) as string[];
+		includeDirs = includeDirs.map((p: string) => String(p).trim()).filter(Boolean);
+
+		const docFsPath = fileUriToFsPath(uri);
+		const workspaceFolders = await connection.workspace.getWorkspaceFolders();
+		let workspaceFolderPath: string | undefined;
+
+		if (workspaceFolders && workspaceFolders.length > 0) {
+			const matchingFolder = workspaceFolders.find(wf => uri.startsWith(wf.uri));
+			if (matchingFolder) {
+				workspaceFolderPath = matchingFolder.uri.startsWith('file://')
+					? fileUriToFsPath(matchingFolder.uri) ?? undefined
+					: matchingFolder.uri;
+			}
+			if (!workspaceFolderPath) {
+				const folderUri = workspaceFolders[0].uri;
+				workspaceFolderPath = folderUri.startsWith('file://')
+					? fileUriToFsPath(folderUri) ?? undefined
+					: folderUri;
+			}
+		}
+
+		includeDirs = includeDirs.map((p: string) => resolvePathVariables(p, {
+			workspaceFolderPath,
+			fileFsPath: docFsPath ?? undefined,
+			cwd: process.cwd()
+		}));
+	} catch {
+		includeDirs = [];
+	}
+	return includeDirs;
+}
+
+const includeService = new IncludeService(documentService, documents, getIncludeDirs);
+const diagnosticService = new DiagnosticService(documentService, includeService, prototypeService);
+const symbolResolver = new SymbolResolver(documentService, includeService, prototypeService);
+
+// ─── Capability negotiation ─────────────────────────────────────────────────
+
 let hasConfigurationCapability = false;
 let hasWorkspaceFolderCapability = false;
-let hasDiagnosticRelatedInformationCapability = false;
 
 connection.onInitialize((params: InitializeParams) => {
 	const capabilities = params.capabilities;
 
-	// Does the client support the `workspace/configuration` request?
-	// If not, we fall back using global settings.
 	hasConfigurationCapability = !!(
 		capabilities.workspace && !!capabilities.workspace.configuration
 	);
 	hasWorkspaceFolderCapability = !!(
 		capabilities.workspace && !!capabilities.workspace.workspaceFolders
 	);
-	hasDiagnosticRelatedInformationCapability = !!(
-		capabilities.textDocument &&
-		capabilities.textDocument.publishDiagnostics &&
-		capabilities.textDocument.publishDiagnostics.relatedInformation
-	);
 
 	const result: InitializeResult = {
 		capabilities: {
 			textDocumentSync: TextDocumentSyncKind.Full,
-			// Tell the client that this server supports code completion.
 			completionProvider: {
 				resolveProvider: true
 			},
-			// Tell the client that this server supports hover.
 			hoverProvider: true,
 			definitionProvider: true,
-			documentFormattingProvider: true
+			documentFormattingProvider: true,
+			documentSymbolProvider: true
 		}
 	};
 	if (hasWorkspaceFolderCapability) {
@@ -95,13 +127,7 @@ connection.onInitialize((params: InitializeParams) => {
 });
 
 connection.onInitialized(() => {
-	// Load prototypes asynchronously
-	prototypesLoader.load().catch((error) => {
-		connection.console.error(`Failed to load prototypes: ${error}`);
-	});
-
 	if (hasConfigurationCapability) {
-		// Register for all configuration changes.
 		connection.client.register(DidChangeConfigurationNotification.type, undefined);
 	}
 	if (hasWorkspaceFolderCapability) {
@@ -111,88 +137,50 @@ connection.onInitialized(() => {
 	}
 });
 
-// The example settings
+// ─── Settings ───────────────────────────────────────────────────────────────
+
 interface ServerSettings {
 	maxNumberOfProblems: number;
 }
 
-// The global settings, used when the `workspace/configuration` request is not supported by the client.
-// Please note that this is not the case when using this server with the client provided in this example
-// but could happen with other clients.
 const defaultSettings: ServerSettings = { maxNumberOfProblems: 1000 };
 let globalSettings: ServerSettings = defaultSettings;
-
-// Cache the settings of all open documents
 const documentSettings: Map<string, Thenable<ServerSettings>> = new Map();
 
 connection.onDidChangeConfiguration(change => {
 	if (hasConfigurationCapability) {
-		// Reset all cached document settings
 		documentSettings.clear();
 	} else {
 		globalSettings = <ServerSettings>(
 			(change.settings.langServer || defaultSettings)
 		);
 	}
-
-	// Revalidate all open text documents
-	documents.all().forEach(validateTextDocument);
 });
 
-// Only keep settings for open documents
+// ─── Document lifecycle ─────────────────────────────────────────────────────
+
 documents.onDidClose(e => {
 	documentSettings.delete(e.document.uri);
-	documentSymbols.clearForUri(e.document.uri);
+	documentService.clear(e.document.uri);
+	includeService.invalidate(e.document.uri);
 });
 
-// The content of a text document has changed. This event is emitted
-// when the text document first opened or when its content has changed.
 documents.onDidChangeContent(change => {
-	documentSymbols.updateForDocument(change.document);
-	validateTextDocument(change.document);
+	const doc = change.document;
+	documentService.update(doc.uri, doc.version, doc.getText());
+	includeService.invalidate(doc.uri);
 });
 
-// Register providers
-// Register a single shared includes provider and pass it to other providers.
-const includesProvider = registerIncludesProvider({ connection, documents, documentSymbols });
+// ─── Register providers ─────────────────────────────────────────────────────
 
-async function validateTextDocument(textDocument: TextDocument): Promise<void> {
-	const text = textDocument.getText();
-
-	// Collect variables from include files
-	const includeFileVariables: IncludeFileVariable[] = [];
-	try {
-		const includeFiles = await includesProvider.getIncludeFilesForUri(textDocument.uri);
-		for (const filePath of includeFiles) {
-			const index = documentSymbols.getIndexForFsPath(filePath);
-			if (index) {
-				// Extract just the filename for display
-				const fileName = filePath.split(/[\\/]/).pop() || filePath;
-				for (const varName of Object.keys(index.variables)) {
-					includeFileVariables.push({ name: varName, sourceFile: fileName, kind: 'variable' });
-				}
-				for (const funcName of Object.keys(index.functions)) {
-					includeFileVariables.push({ name: funcName, sourceFile: fileName, kind: 'function' });
-				}
-			}
-		}
-	} catch {
-		// Best-effort: continue validation without include file variables
-	}
-
-	const diagnostics: Diagnostic[] = Validator.ValidateWithIncludes(text, includeFileVariables);
-	
-	// Send the computed diagnostics to VSCode.
-	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-}
-
-registerCompletionProvider({ connection, documents, documentSymbols, includesProvider });
-registerDefinitionProvider({ connection, documents, documentSymbols, includesProvider });
-registerHoverProvider({ connection, documents, documentSymbols, includesProvider });
+registerCompletionProvider({ connection, documents, documentService, includeService, prototypeService, symbolResolver });
+registerDefinitionProvider({ connection, documents, symbolResolver });
+registerHoverProvider({ connection, documents, symbolResolver, prototypeService });
 registerFormattingProvider({ connection, documents });
+registerValidationProvider({ connection, documents, diagnosticService, prototypeService });
+registerDocumentSymbolProvider({ connection, documents, documentService });
 
 // Make the text document manager listen on the connection
-// for open, change and close text document events
 documents.listen(connection);
 
 // Listen on the connection

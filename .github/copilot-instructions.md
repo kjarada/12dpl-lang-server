@@ -11,6 +11,8 @@ This is a **VS Code Language Server Protocol (LSP) extension** for **12dPL**, th
 
 ## Architecture
 
+All code changes should work towards the architecture defined in ARCHITECTURE.md.
+
 ### Client–Server Split
 
 The project follows standard LSP architecture with two packages:
@@ -86,7 +88,6 @@ These are copied to `server/out/resources/` at build time by `server/copy-resour
 12dPL is a **C-like language** with important differences that affect how the language server works:
 
 ### Identifiers
-- **Case-insensitive** — `myVar`, `MyVar`, and `MYVAR` are the same symbol. All name comparisons must use `.toLowerCase()`.
 - **Digit-prefixed identifiers allowed** — e.g., `2d_string`, `3d_point` are valid. The grammar uses `Digit+ IdentifierNondigit ...` in the `Identifier` rule.
 
 ### Type System
@@ -260,7 +261,6 @@ The extension can invoke the **cc4d.exe** compiler (Windows-only):
 - Include file resolution logs warnings for unresolvable paths but does not throw
 
 ### String Comparisons
-- **Always use `.toLowerCase()` for identifier comparisons** — 12dPL is case-insensitive
 - Path comparisons on Windows use `canonicalizeFsPath()` (forward-slash + lowercase)
 
 ### ANTLR Visitor Pattern
@@ -300,6 +300,12 @@ The extension can invoke the **cc4d.exe** compiler (Windows-only):
 | `12dpl.indentSize` | number | `4` | Formatter indent width |
 | `langServer.maxNumberOfProblems` | number | `100` | Max diagnostics reported |
 | `langServer.trace.server` | string | `"off"` | LSP trace level (`off`/`messages`/`verbose`) |
+
+## Git Workflow
+
+- The default integration branch is **`dev`**, not `main`.
+- All pull requests should target **`dev`** (`--base dev`).
+- Feature/fix branches should be created from `dev`.
 
 ## Common Development Tasks
 

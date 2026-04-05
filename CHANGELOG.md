@@ -266,27 +266,74 @@ bun run test         # Run e2e tests
 
 ---
 
-## [v1.2.0] - (Date)
+## [v1.2.0] - (11/03/2026)
 
 ### New Features
 - Full clean up and re-structure of code
 	- Moved compile and formatting from extension.ts to feature modules to improve readability
-	- 
 - Include files are now cached to reduce queries to file system (includesProvider)
 - Added ability to use some VSCode variables in "inculudePaths" setting
+- Added basic MTF Snippet support
+- Added common language inserts as snippets
 
 ### Bug Fixes
 - Include paths now parse symbols from included header files using "includePaths" setting
 - Updated defaults for autoformatting
 - Updated text fixture launch path
 - Cleaned up files in the repo that should not have been tracked and updated gitignore
-- Time changed to built in type and removed function syntax highlighting. 
+- Time changed to built in type and removed function syntax highlighting. Added depreciation warning.
 - Fixed goto definition for include files
 - Fixed left over C style grammar in ANTLR file to remove syntax errors for valid 12dPL
+- Undeclared variables now trigger an error 
+- Added missing container types to syntax highlight and grammar
+- Added checks for redeclaration of variables 
 
 
 ### Overview
-General cleanup of all code, complete restructure and small bug fixes.
+General cleanup of all code, complete restructure and improvments to the validation.
+
+---
+
+## [v1.3.0] - March 2026
+
+### Added
+- **Enhanced Type System**:
+  - ANTLR-controlled type system with inheritance support (e.g., Panel inherits from Widget)
+  - Automatic type promotion in function arguments and return type checking
+  - Comprehensive type documentation for all 90+ built-in types
+- **Advanced Validation**:
+  - Function argument type validation with full signature matching
+  - Return type validation for function calls and assignments
+  - Scope-aware variable definition checks to prevent false positives
+  - Support for function overloading with proper type checking
+- **Architecture Improvements**:
+  - Refactored validator system to make it easier to extend with additional checks
+  - Improved symbol collectors for better scope tracking
+  - Enhanced include-file resolution and symbol handling
+
+### Fixed
+- **Case Sensitivity**: Fixed case sensitivity issues in type and symbol resolution (#58)
+- **Type Handling**: Removed hardtyped types in favor of ANTLR grammar-controlled types (#59)
+- **Function Arguments**: Fixed invalid function argument validation and added comprehensive tests (#55, #60)
+- **Return Values**: Added missing return value checks and return type validation (#57)
+- **Void Functions**: Fixed detection of void function returns when return value is consumed (#56)
+- **Variable Scope**: Fixed scope tracking for variable definition checks to reduce false redeclaration errors (#54)
+- **Parser**: Resolved infinite loop in argument validation, improved error handling
+
+### Changed
+- Refactored type hierarchy for better maintainability and extensibility
+- Improved diagnostic messages for type mismatches
+- Enhanced symbol resolution with better include-file integration
+
+### Tests
+- Added comprehensive tests for all new validation features
+- Expanded formatter and symbol collector test coverage
+- Added tests for type inheritance and promotion
+
+**Release Date**: March 22, 2026  
+**Status**: Pre-release Testing 
+
+Please provide feedback through the official 12d Forums or on github if you notice any issues. 
 
 ---
 
