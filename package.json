@@ -23,7 +23,7 @@
 		"12d"
 	],
 	"engines": {
-		"vscode": "^1.74.0"
+		"vscode": "^1.82.0"
 	},
 	"main": "./client/out/extension",
 	"activationEvents": [
@@ -95,7 +95,24 @@
 					".4dm",
 					".h"
 				],
-				"configuration": "./language-configuration.json"
+				"configuration": "./language-configuration.json",
+				"icon": {
+					"light": "./Images/4dm.svg",
+					"dark": "./Images/4dm.svg"
+				}
+			},
+			{
+				"id": "12dpl-compiled",
+				"aliases": [
+					"12dPL Compiled"
+				],
+				"extensions": [
+					".4do"
+				],
+				"icon": {
+					"light": "./Images/4do.svg",
+					"dark": "./Images/4do.svg"
+				}
 			},
 			{
 				"id": "mtfsnippet",
@@ -126,6 +143,7 @@
 				"path": "./snippets/12dpl.tmSnippets.json"
 			}
 		],
+
 		"configuration": {
 			"type": "object",
 			"title": "12dPL",
@@ -222,7 +240,6 @@
 	"scripts": {
 		"vscode:prepublish": "bun run compile && bun server/copy-resources.js",
 		"generate-antlr": "cd server && bun run generate-antlr",
-		"sync-types": "bun server/sync-grammar-types.js",
 		"build": "bun run compile",
 		"compile": "bun x tsc -b && bun server/copy-resources.js",
 		"watch": "bun x tsc -b -w",
@@ -235,11 +252,11 @@
 		"test:e2e": "sh ./scripts/e2e.sh"
 	},
 	"devDependencies": {
-		"@types/node": "^16.11.7",
-		"@typescript-eslint/eslint-plugin": "^5.42.0",
-		"@typescript-eslint/parser": "^5.42.0",
-		"@vscode/vsce": "^3.7.1",
-		"eslint": "^8.26.0",
-		"typescript": "^4.9.5"
+		"@types/node": "latest",
+		"@typescript-eslint/eslint-plugin": "latest",
+		"@typescript-eslint/parser": "latest",
+		"@vscode/vsce": "latest",
+		"eslint": "latest",
+		"typescript": "latest"
 	}
 }
